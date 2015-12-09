@@ -7,5 +7,5 @@ public interface CustomUserDetailsService extends org.springframework.security.c
 	public  User loadUserByUsername(String username);
 
 	public User save(User user);
-
+	public  User findOne(Long userId);
 }

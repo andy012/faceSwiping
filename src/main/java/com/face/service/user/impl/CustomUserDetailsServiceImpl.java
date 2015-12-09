@@ -27,8 +27,14 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
 		return user;
 	}
 
+
+
 	public User save(User user){
 		return userRepo.save(user);
 	}
 
+	@Override
+	public User findOne(Long userId) {
+		return userRepo.findOne(userId);
+	}
 }

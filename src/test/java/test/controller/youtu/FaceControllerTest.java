@@ -95,15 +95,11 @@ public class FaceControllerTest {
 
         return httpHeaders;
     }
-
-
-
-
     @Test
     public void testGetUserFaces(){
-
+        testLogin();
         try {
-            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/faces").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/faces/").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
             System.out.println(result.getResponse().getContentAsString());
         } catch (Exception e) {
             e.printStackTrace();

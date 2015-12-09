@@ -9,6 +9,7 @@ import com.face.data.youtu.UserFacesResponse;
 import com.face.model.user.User;
 import com.face.model.user.UserFaceImagesEntity;
 import com.face.service.qiniu.QiniuService;
+import com.face.service.user.CustomUserDetailsService;
 import com.face.service.user.UserFaceImagesService;
 import com.face.service.youtu.Youtu;
 import com.face.service.youtu.YoutuService;
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,6 +42,8 @@ public class FaceController extends BaseController{
     private UserFaceImagesService userFaceImagesService;
     @Autowired
     private YoutuService youtuService;
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
     @Autowired
     private QiniuService qiniuService;
     @RequestMapping(value = "/youtu/face/detect", method = RequestMethod.POST)
@@ -114,7 +118,9 @@ public class FaceController extends BaseController{
     @RequestMapping(value = "/user/faces", method = RequestMethod.GET)
     public UserFacesResponse getUserFaces(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //JSONObject re=null;
-        User user= getUser();
+
+        User user=getUser();
+
         List<UserFaceImagesEntity> userFaceImagesEntities=null;
         try {
             userFaceImagesEntities=userFaceImagesService.findAllByUserId(user.getId());

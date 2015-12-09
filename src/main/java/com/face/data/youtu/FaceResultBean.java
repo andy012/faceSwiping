@@ -16,5 +16,4 @@ public class FaceResultBean extends DataBase {
         this.key = key;
     }
 
-
 }

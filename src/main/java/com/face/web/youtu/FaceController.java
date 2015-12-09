@@ -1,7 +1,9 @@
 package com.face.web.youtu;
 
+import com.alibaba.fastjson.JSON;
 import com.face.data.mapper.UrlMapper;
 import com.face.data.user.UserBaseInfo;
+import com.face.data.youtu.UserAddFacesResponse;
 import com.face.data.youtu.UserFacesRequest;
 import com.face.data.youtu.UserFacesResponse;
 import com.face.model.user.User;
@@ -63,13 +65,13 @@ public class FaceController extends BaseController{
 
     @RequestMapping(value = "/user/faces", method = RequestMethod.PUT)
     public String addFace(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        JSONObject re=null;
         UserBaseInfo userBaseInfo=getUserBase();
         UserFacesRequest faceAddRequest= new ObjectMapper().readValue(request.getInputStream(), UserFacesRequest.class);
+        UserAddFacesResponse userAddFacesResponse=null;
         try {
 
 
-            re=youtuService.AddFaceUrl(userBaseInfo.getId(),faceAddRequest.getKeys(),userFaceImagesService,qiniuService);
+            userAddFacesResponse=youtuService.AddFaceUrl(userBaseInfo.getId(),faceAddRequest.getKeys(),userFaceImagesService,qiniuService);
 
 //            String url=qiniuService.createPrivateUrl("12345");
 //            System.out.println(url);
@@ -79,7 +81,7 @@ public class FaceController extends BaseController{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return re.toString();
+        return JSON.toJSONString(userAddFacesResponse);
     }
 
     @RequestMapping(value = "/user/faces", method = RequestMethod.DELETE)

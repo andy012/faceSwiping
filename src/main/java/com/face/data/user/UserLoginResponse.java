@@ -20,10 +20,7 @@ public class UserLoginResponse extends DataBase{
     public void setUserBaseInfo(UserBaseInfo userBaseInfo) {
         this.userBaseInfo = userBaseInfo;
     }
-    public void setResponseCode(ResponseCode responseCode){
-        this.errorcode=responseCode.getCode();
-        this.errormsg=responseCode.getDescription();
-    }
+
 
     public void setUser(User user,QiniuService qiniuService){
         userBaseInfo.setId(user.getId());

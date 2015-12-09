@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/main/java/com/face/init/config/DataSourceConfig.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/face/service/youtu/HttpsUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/face/service/youtu/Youtu.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/face/service/youtu/sign/Base64Util.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/face/service/youtu/sign/HMACSHA1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/face/service/youtu/sign/MD5.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/face/service/youtu/sign/YoutuSign.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/test.jpg" charset="GBK" />
     <file url="PROJECT" charset="GBK" />
   </component>
 </project>

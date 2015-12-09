@@ -1748,7 +1748,7 @@ function setupModuleLoader(window) {
      * myModule.value('appName', 'MyCoolApp');
      *
      * // configure existing services inside initialization blocks.
-     * myModule.config(['$locationProvider', function($locationProvider) {
+     * myModule.sql(['$locationProvider', function($locationProvider) {
      *   // Configure existing providers
      *   $locationProvider.hashPrefix('!');
      * }]);
@@ -1768,7 +1768,7 @@ function setupModuleLoader(window) {
      * @param {!Array.<string>=} requires If specified then new module is being created. If
      *        unspecified then the module is being retrieved for further configuration.
      * @param {Function=} configFn Optional configuration function for the module. Same as
-     *        {@link angular.Module#config Module#config()}.
+     *        {@link angular.Module#config Module#sql()}.
      * @returns {module} new module with the {@link angular.Module} api.
      */
     return function module(name, requires, configFn) {
@@ -1868,7 +1868,7 @@ function setupModuleLoader(window) {
            * @name angular.Module#value
            * @module ng
            * @param {string} name service name
-           * @param {*} object service instance object.
+           * @param {*} object Service instance object.
            * @description
            * See {@link auto.$provide#value $provide.value()}.
            */
@@ -3663,11 +3663,11 @@ function annotate(fn, strictDi, name) {
  * are constructor functions, whose instances are responsible for "providing" a factory for a
  * service.
  *
- * service provider names start with the name of the service they provide followed by `Provider`.
+ * Service provider names start with the name of the service they provide followed by `Provider`.
  * For example, the {@link ng.$log $log} service has a provider called
  * {@link ng.$logProvider $logProvider}.
  *
- * service provider objects can have additional methods which allow configuration of the provider
+ * Service provider objects can have additional methods which allow configuration of the provider
  * and its service. Importantly, you can configure what kind of service is created by the `$get`
  * method, or how that service will act. For example, the {@link ng.$logProvider $logProvider} has a
  * method {@link ng.$logProvider#debugEnabled debugEnabled}
@@ -5634,7 +5634,7 @@ function $TemplateCacheProvider() {
  * A compile function can have a return value which can be either a function or an object.
  *
  * * returning a (post-link) function - is equivalent to registering the linking function via the
- *   `link` property of the config object when the compile function is empty.
+ *   `link` property of the sql object when the compile function is empty.
  *
  * * returning an object with function(s) registered via `pre` and `post` properties - allows you to
  *   control when a linking function should be called during the linking phase. See info about
@@ -8087,11 +8087,11 @@ function $HttpProvider() {
      *
      * ```js
      *   $http({method: 'GET', url: '/someUrl'}).
-     *     success(function(data, status, headers, config) {
+     *     success(function(data, status, headers, sql) {
      *       // this callback will be called asynchronously
      *       // when the response is available
      *     }).
-     *     error(function(data, status, headers, config) {
+     *     error(function(data, status, headers, sql) {
      *       // called asynchronously if an error occurs
      *       // or server returns response with an error status.
      *     });
@@ -8166,8 +8166,8 @@ function $HttpProvider() {
      * });
      * ```
      *
-     * In addition, you can supply a `headers` property in the config object passed when
-     * calling `$http(config)`, which overrides the defaults without changing them globally.
+     * In addition, you can supply a `headers` property in the sql object passed when
+     * calling `$http(sql)`, which overrides the defaults without changing them globally.
      *
      *
      * ## Transforming Requests and Responses
@@ -8205,7 +8205,7 @@ function $HttpProvider() {
      * `transformRequest` and/or `transformResponse` properties on the configuration object passed
      * into `$http`.
      *
-     * Note that if you provide these properties on the config object the default transformations will be
+     * Note that if you provide these properties on the sql object the default transformations will be
      * overwritten. If you wish to augment the default transformations then you must include them in your
      * local transformation array.
      *
@@ -8273,9 +8273,9 @@ function $HttpProvider() {
      *
      * There are two kinds of interceptors (and two kinds of rejection interceptors):
      *
-     *   * `request`: interceptors get called with a http `config` object. The function is free to
-     *     modify the `config` object or create a new one. The function needs to return the `config`
-     *     object directly, or a promise containing the `config` or a new `config` object.
+     *   * `request`: interceptors get called with a http `sql` object. The function is free to
+     *     modify the `sql` object or create a new one. The function needs to return the `sql`
+     *     object directly, or a promise containing the `sql` or a new `sql` object.
      *   * `requestError`: interceptor gets called when a previous interceptor threw an error or
      *     resolved with a rejection.
      *   * `response`: interceptors get called with http `response` object. The function is free to
@@ -8290,9 +8290,9 @@ function $HttpProvider() {
      *   $provide.factory('myHttpInterceptor', function($q, dependency1, dependency2) {
      *     return {
      *       // optional method
-     *       'request': function(config) {
+     *       'request': function(sql) {
      *         // do something on success
-     *         return config;
+     *         return sql;
      *       },
      *
      *       // optional method
@@ -8329,7 +8329,7 @@ function $HttpProvider() {
      *   // alternatively, register the interceptor via an anonymous factory
      *   $httpProvider.interceptors.push(function($q, dependency1, dependency2) {
      *     return {
-     *      'request': function(config) {
+     *      'request': function(sql) {
      *          // same as above
      *       },
      *
@@ -8393,11 +8393,11 @@ function $HttpProvider() {
      * for added security.
      *
      * The name of the headers can be specified using the xsrfHeaderName and xsrfCookieName
-     * properties of either $httpProvider.defaults at config-time, $http.defaults at run-time,
-     * or the per-request config object.
+     * properties of either $httpProvider.defaults at sql-time, $http.defaults at run-time,
+     * or the per-request sql object.
      *
      *
-     * @param {object} config Object describing the request to be made and how it should be
+     * @param {object} sql Object describing the request to be made and how it should be
      *    processed. The object has following properties:
      *
      *    - **method** – `{string}` – HTTP method (e.g. 'GET', 'POST', etc)
@@ -8445,10 +8445,10 @@ function $HttpProvider() {
      *     functions.
      *   - **status** – `{number}` – HTTP status code of the response.
      *   - **headers** – `{function([headerName])}` – Header getter function.
-     *   - **config** – `{Object}` – The configuration object that was used to generate the request.
+     *   - **sql** – `{Object}` – The configuration object that was used to generate the request.
      *   - **statusText** – `{string}` – HTTP status text of the response.
      *
-     * @property {Array.<Object>} pendingRequests Array of config objects for currently pending
+     * @property {Array.<Object>} pendingRequests Array of sql objects for currently pending
      *   requests. This is primarily meant to be used for debugging purposes.
      *
      *
@@ -9154,7 +9154,7 @@ var $interpolateMinErr = minErr('$interpolate');
 <script>
   var customInterpolationApp = angular.module('customInterpolationApp', []);
 
-  customInterpolationApp.config(function($interpolateProvider) {
+  customInterpolationApp.sql(function($interpolateProvider) {
     $interpolateProvider.startSymbol('//');
     $interpolateProvider.endSymbol('//');
   });
@@ -14013,7 +14013,7 @@ function adjustMatchers(matchers) {
  * Here is what a secure configuration for this scenario might look like:
  *
  * ```
- *  angular.module('myApp', []).config(function($sceDelegateProvider) {
+ *  angular.module('myApp', []).sql(function($sceDelegateProvider) {
  *    $sceDelegateProvider.resourceUrlWhitelist([
  *      // Allow same origin resource loads.
  *      'self',
@@ -14549,7 +14549,7 @@ function $SceDelegateProvider() {
  * That said, here's how you can completely disable SCE:
  *
  * ```
- * angular.module('myAppWithSceDisabledmyApp', []).config(function($sceProvider) {
+ * angular.module('myAppWithSceDisabledmyApp', []).sql(function($sceProvider) {
  *   // Completely disable SCE.  For demonstration purposes only!
  *   // Do not use in new projects.
  *   $sceProvider.enabled(false);
@@ -14646,7 +14646,7 @@ function $SceProvider() {
      * @kind function
      *
      * @return {Boolean} true if SCE is enabled, false otherwise.  If you want to set the value, you
-     * have to do it at module config time on {@link ng.$sceProvider $sceProvider}.
+     * have to do it at module sql time on {@link ng.$sceProvider $sceProvider}.
      *
      * @description
      * Returns a boolean indicating if SCE is enabled.

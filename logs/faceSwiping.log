@@ -1,0 +1,2 @@
+2015-12-09 13:00:49,818 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
+2015-12-09 13:03:39,055 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null

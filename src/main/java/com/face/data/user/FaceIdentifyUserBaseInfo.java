@@ -41,15 +41,12 @@ public class FaceIdentifyUserBaseInfo {
     public void setHeadImageUrl(String headImageUrl) {
         this.headImageUrl = headImageUrl;
     }
-
     public Double getConfidence() {
         return confidence;
     }
-
     public void setConfidence(Double confidence) {
         this.confidence = confidence;
     }
-
     @Override
     public boolean equals(Object obj) {
         return this.id.equals(((FaceIdentifyUserBaseInfo)obj).getId());

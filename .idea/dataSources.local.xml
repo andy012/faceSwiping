@@ -7,5 +7,11 @@
       <schema-pattern>faceSwiping.*</schema-pattern>
       <default-schemas>faceSwiping.*</default-schemas>
     </data-source>
+    <data-source name="MySQL - faceSwiping@115.159.152.203" uuid="21e5bb4f-3f69-47a9-a739-7cc85c907c5b">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>faceSwiping.*</schema-pattern>
+      <default-schemas>faceSwiping.*</default-schemas>
+    </data-source>
   </component>
 </project>

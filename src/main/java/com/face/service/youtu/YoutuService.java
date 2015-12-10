@@ -2,7 +2,10 @@ package com.face.service.youtu;
 
 import com.face.data.youtu.Base.AddFacesResponse;
 import com.face.data.youtu.UserAddFacesResponse;
+import com.face.data.youtu.UserFaceIdentifyRequest;
+import com.face.data.youtu.UserFaceIdentifyResponse;
 import com.face.service.qiniu.QiniuService;
+import com.face.service.user.CustomUserDetailsService;
 import com.face.service.user.UserFaceImagesService;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +26,7 @@ public interface YoutuService {
     public JSONObject DetectFaceURL(String url, int mode) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException;
     public UserAddFacesResponse AddFaceUrl(Long person_id, List<String> key_arr,UserFaceImagesService userFaceImagesService,QiniuService qiniuService) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException ;
     JSONObject GetFaceIds(String person_id) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException;
+    public UserFaceIdentifyResponse FaceIdentifyUrl(UserFaceIdentifyRequest userFaceIdentifyRequest) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException;
 
     public JSONObject DelFace(Long person_id, List<String> keys_arr,UserFaceImagesService userFaceImagesService,QiniuService qiniuService) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException ;
 }

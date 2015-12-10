@@ -1,6 +1,7 @@
 package test.controller.youtu;
 
 import com.alibaba.fastjson.JSON;
+import com.face.data.youtu.UserFaceIdentifyRequest;
 import com.face.data.youtu.UserFacesRequest;
 import com.face.init.Initializer;
 import com.face.init.config.WebAppConfig;
@@ -69,11 +70,9 @@ public class FaceControllerTest {
 
         String loginData="{ \"username\":\"zhoujielun@face.com\", \"password\":\"pass\"}";
         try {
-
             System.out.println(MediaType.APPLICATION_JSON);
             System.out.println(loginData);
             MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/login").content(loginData).contentType(MediaType.APPLICATION_JSON)).andReturn();
-
 //            System.out.println(result.getRequest().getServerPort());
 //            System.out.println(result.getRequest().getRequestURL());
             X_AUTH_TOKEN=result.getResponse().getHeader("X-AUTH-TOKEN");
@@ -111,13 +110,17 @@ public class FaceControllerTest {
     public void testAddFace(){
 
 
-        testLogin();
+        //testLogin();
         UserFacesRequest userFacesRequest=new UserFacesRequest();
-        userFacesRequest.addKey("zhoujielun1.jpg");
-        userFacesRequest.addKey("zhoujielun1.jpg");
-        userFacesRequest.addKey("zhoujielun2.jpg");
+//        userFacesRequest.addKey("zhoujielun1.jpg");
+//        userFacesRequest.addKey("zhoujielun1.jpg");
+//        userFacesRequest.addKey("zhoujielun2.jpg");
+//
+//        userFacesRequest.addKey("zhoujielun3.jpg");
 
-        userFacesRequest.addKey("zhoujielun3.jpg");
+        userFacesRequest.addKey("dhgtest2.jpg");
+        userFacesRequest.addKey("dhgtest3.jpg");
+        userFacesRequest.addKey("dhgtest4.jpg");
         System.out.println(JSON.toJSONString(userFacesRequest));
         //userFacesRequest.addKey("dhgtest2.jpg");
         try {
@@ -133,9 +136,8 @@ public class FaceControllerTest {
         testLogin();
         UserFacesRequest userFacesRequest=new UserFacesRequest();
         userFacesRequest.addKey("zhoujielun1.jpg");
-        userFacesRequest.addKey("zhoujielun2.jpg");
-
-        userFacesRequest.addKey("zhoujielun3.jpg");
+        //userFacesRequest.addKey("zhoujielun2.jpg");
+       // userFacesRequest.addKey("zhoujielun3.jpg");
 //        userFacesRequest.addKey("dhgtest3.jpg");
 //
 //        userFacesRequest.addKey("dhgtest4.jpg");
@@ -144,6 +146,23 @@ public class FaceControllerTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Test
+    public void testIdentifyFace(){
+
+
+        UserFaceIdentifyRequest userFaceIdentifyRequest=new UserFaceIdentifyRequest();
+        userFaceIdentifyRequest.setKey("dhgtest.jpg");
+        System.out.println(JSON.toJSONString(userFaceIdentifyRequest));
+        try {
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/face/identify").headers(getHttpHeaders()).content(JSON.toJSONString(userFaceIdentifyRequest)).contentType(MediaType.APPLICATION_JSON)).andDo(MockMvcResultHandlers.print()).andReturn();
+
+        }catch (Exception e){
+
+        }
+
     }
 
 

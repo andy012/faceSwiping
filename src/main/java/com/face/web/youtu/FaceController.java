@@ -3,9 +3,7 @@ package com.face.web.youtu;
 import com.alibaba.fastjson.JSON;
 import com.face.data.mapper.UrlMapper;
 import com.face.data.user.UserBaseInfo;
-import com.face.data.youtu.UserAddFacesResponse;
-import com.face.data.youtu.UserFacesRequest;
-import com.face.data.youtu.UserFacesResponse;
+import com.face.data.youtu.*;
 import com.face.model.user.User;
 import com.face.model.user.UserFaceImagesEntity;
 import com.face.service.qiniu.QiniuService;
@@ -131,6 +129,30 @@ public class FaceController extends BaseController{
         }
         UserFacesResponse userFacesResponse=new UserFacesResponse(UrlMapper.linkedHashMap2Urls(userFaceImagesEntities,qiniuService));
         return userFacesResponse;//re.toString();
+    }
+
+
+    @RequestMapping(value = "/user/face/identify",method = RequestMethod.GET)
+    public UserFaceIdentifyResponse faceIdentify(HttpServletRequest request, HttpServletResponse response){
+        UserFaceIdentifyResponse userFaceIdentifyResponse=null;
+
+        try {
+            UserFaceIdentifyRequest userFaceIdentifyRequest= new ObjectMapper().readValue(request.getInputStream(), UserFaceIdentifyRequest.class);
+            userFaceIdentifyResponse=youtuService.FaceIdentifyUrl(userFaceIdentifyRequest);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+
+
+        return userFaceIdentifyResponse;
+
     }
 
 

@@ -1,14 +1,17 @@
 package com.face.service.youtu.impl;
 
 import com.face.data.mapper.UrlMapper;
+import com.face.data.user.FaceIdentifyUserBaseInfo;
 import com.face.data.util.ResponseCode;
-import com.face.data.youtu.Base.AddFacesResponse;
-import com.face.data.youtu.Base.DelPersonResponse;
-import com.face.data.youtu.Base.NewPersonResponse;
+import com.face.data.youtu.Base.*;
 import com.face.data.youtu.FaceResultBean;
 import com.face.data.youtu.UserAddFacesResponse;
+import com.face.data.youtu.UserFaceIdentifyRequest;
+import com.face.data.youtu.UserFaceIdentifyResponse;
+import com.face.model.user.User;
 import com.face.model.user.UserFaceImagesEntity;
 import com.face.service.qiniu.QiniuService;
+import com.face.service.user.CustomUserDetailsService;
 import com.face.service.user.UserFaceImagesService;
 import com.face.service.youtu.Youtu;
 import com.face.service.youtu.YoutuService;
@@ -31,7 +34,12 @@ import java.util.List;
 @Service
 public class YoutuServiceImpl implements YoutuService{
 
-
+    @Autowired
+    private UserFaceImagesService userFaceImagesService;
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+    @Autowired
+    private QiniuService qiniuService;
 
     private static String GROUP_ID="FACE_SWIPING";
 
@@ -138,14 +146,41 @@ public class YoutuServiceImpl implements YoutuService{
             }
         }
 
+
         userAddFacesResponse.setResponseCode();
         return userAddFacesResponse;
 
     }
 
+
+
+
     @Override
     public JSONObject GetFaceIds(String person_id) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException {
         return youtu.GetFaceIds(person_id);
+    }
+
+    @Override
+    public UserFaceIdentifyResponse FaceIdentifyUrl(UserFaceIdentifyRequest userFaceIdentifyRequest) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException {
+        JSONObject re=youtu.FaceIdentifyUrl(UrlMapper.map2Url(userFaceIdentifyRequest.getKey(), qiniuService),GROUP_ID);
+        IdentityFaceResponse identityFaceResponse=new ObjectMapper().readValue(re.toString(), IdentityFaceResponse.class);
+        UserFaceIdentifyResponse userFaceIdentifyResponse=new UserFaceIdentifyResponse();
+
+        /**
+         * 转化为用户基本信息
+         */
+        for(Candidate candidate:identityFaceResponse.getCandidates()){
+            User user=customUserDetailsService.findOne(Long.parseLong(candidate.getPersonId()));
+            FaceIdentifyUserBaseInfo faceIdentifyUserBaseInfo=new FaceIdentifyUserBaseInfo();
+            faceIdentifyUserBaseInfo.setConfidence(candidate.getConfidence());
+            faceIdentifyUserBaseInfo.setId(user.getId());
+            faceIdentifyUserBaseInfo.setNickName(user.getUserDetailInfoEntity().getNickName());
+            faceIdentifyUserBaseInfo.setUserName(user.getUsername());
+            faceIdentifyUserBaseInfo.setHeadImageUrl(qiniuService.createPrivateUrl(user.getUserDetailInfoEntity().getHeadImageKey()));
+            userFaceIdentifyResponse.add(faceIdentifyUserBaseInfo);
+        }
+        userFaceIdentifyResponse.setResponseCode(ResponseCode.SUCCESS);
+        return userFaceIdentifyResponse;
     }
 
     @Override

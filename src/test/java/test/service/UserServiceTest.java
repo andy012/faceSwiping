@@ -30,12 +30,15 @@ public class UserServiceTest {
 
         //设置密码
         BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
-        System.out.println(bCryptPasswordEncoder.encode("pass"));
+        System.out.println(bCryptPasswordEncoder.encode("1"));
 
-        user.setPassword(bCryptPasswordEncoder.encode("pass"));
+        user.setPassword(bCryptPasswordEncoder.encode("1"));
         System.out.println(user.getPassword());
-        user.setUsername("zhoujielun@face.com");
+        user.setUsername("Kindy");
         user.setExpires(100000L);
+        user.getUserDetailInfoEntity().setGeTuiClientId("");
+        user.getUserDetailInfoEntity().setHeadImageKey("5703dbce-f7d4-4817-af2f-310502e41e63.png");
+        user.getUserDetailInfoEntity().setNickName(user.getUsername());
         user.grantRole(UserRole.USER);
         System.out.println(user);
         try {
@@ -44,7 +47,6 @@ public class UserServiceTest {
             e.printStackTrace();
         }
     }
-
 
     @Test
     public void testReflect(){

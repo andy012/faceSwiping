@@ -1,16 +1,24 @@
 package com.face.web.user;
 
 import com.face.data.mapper.UrlMapper;
-import com.face.data.user.UserBaseInfo;
+import com.face.data.user.*;
+import com.face.data.util.ResponseCode;
+import com.face.data.youtu.UserAddFacesResponse;
+import com.face.data.youtu.UserFaceIdentifyRequest;
 import com.face.model.common.ResultInfo;
 import com.face.model.user.User;
 import com.face.model.user.UserAuthentication;
+import com.face.model.user.UserFaceImagesEntity;
 import com.face.repository.user.UserRepository;
 import com.face.model.user.UserRole;
+import com.face.service.getui.Push2Single;
 import com.face.service.qiniu.QiniuService;
 import com.face.service.user.CustomUserDetailsService;
 
+import com.face.service.user.UserFaceImagesService;
 import com.face.web.common.BaseController;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gexin.rp.sdk.base.IPushResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +29,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,24 +46,19 @@ public class UserController extends BaseController {
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
+	Push2Single push2Single;
+	@Autowired
 	CustomUserDetailsService customUserDetailsService;
+	@Autowired
+	UserFaceImagesService userFaceImagesService;
 	@RequestMapping(value = "/api/user/current", method = RequestMethod.GET)
 	public UserBaseInfo getCurrent() {
 		return getUserBase();
 	}
-
-	/**
-	 * 用户登录成功后的处理逻辑
-	 * @return
-	 */
-	@RequestMapping(value = "/loginSuccess",method = RequestMethod.GET)
-	public @ResponseBody ResultInfo<Map<String, Object>> loginSuccess(){
-
-		ResultInfo<Map<String, Object>> resultInfo=new ResultInfo<Map<String, Object>>();
-		resultInfo.setData(getUser().getSimpleObject());
-		return resultInfo;
+	@RequestMapping(value = "/api/user/currentUser", method = RequestMethod.GET)
+	public User getCurrentUser() {
+		return getUser();
 	}
-
 	/**
 	 * 用户登录失败后的处理逻辑
 	 * @return
@@ -162,6 +167,80 @@ public class UserController extends BaseController {
 	}
 
 
+
+	@RequestMapping(value = "/user/secret/{value}" ,method = RequestMethod.PUT)
+	public UserLoginResponse changeSecret(@PathVariable int value,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		User user=getUser();
+		User user1=customUserDetailsService.findOne(user.getId());
+		user1.setSecret(value == 1 ? true:false);
+		customUserDetailsService.save(user1);
+		UserLoginResponse userLoginResponse =new UserLoginResponse();
+		userLoginResponse.setResponseCode(ResponseCode.SUCCESS);
+		userLoginResponse.setUser(user1,qiniuService,userFaceImagesService);
+		return userLoginResponse;
+	}
+
+	@RequestMapping(value = "/user/getui/{clientId}" ,method = RequestMethod.PUT)
+	public UserLoginResponse setGeTuiClientId(@PathVariable String clientId ,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		User user=getUser();
+		User user1=customUserDetailsService.findOne(user.getId());
+		System.out.println("-------"+clientId);
+		user1.getUserDetailInfoEntity().setGeTuiClientId(clientId);
+		customUserDetailsService.save(user1);
+		UserLoginResponse userLoginResponse =new UserLoginResponse();
+		userLoginResponse.setResponseCode(ResponseCode.SUCCESS);
+		userLoginResponse.setUser(user1,qiniuService,userFaceImagesService);
+		return userLoginResponse;
+	}
+
+	@RequestMapping(value = "/user/{userId}/friend/{key}" ,method = RequestMethod.POST)
+	public UserAddFriendsResponse requestAddFriends(@PathVariable Long userId,@PathVariable String key,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		User user=getUser();
+		User otherUser = customUserDetailsService.findOne(userId);
+		UserAddFriendsRequest userAddFriendsRequest=new UserAddFriendsRequest();
+		userAddFriendsRequest.setImageUrl(qiniuService.createPrivateUrl(key));
+		userAddFriendsRequest.setUserId(userId.toString());
+		IPushResult ret =push2Single.pushTransmissionTemplate(otherUser.getUserDetailInfoEntity().getGeTuiClientId(),userAddFriendsRequest);
+		System.out.println("正常：" + ret.getResponse().toString());
+		UserAddFriendsResponse userAddFriendsResponse=new UserAddFriendsResponse();
+		userAddFriendsResponse.setResponseCode(ResponseCode.SUCCESS);
+		return userAddFriendsResponse;
+	}
+
+	@RequestMapping(value = "/user/qiniu/token" ,method = RequestMethod.GET)
+	public UserQiniuTokenResponse getQiniuToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserQiniuTokenResponse userQiniuTokenResponse=new UserQiniuTokenResponse();
+		userQiniuTokenResponse.setData(qiniuService.getToken());
+		userQiniuTokenResponse.setResponseCode(ResponseCode.SUCCESS);
+		return userQiniuTokenResponse;
+	}
+
+	@RequestMapping(value = "/user/certification" ,method = RequestMethod.GET)
+	public UserCertificationResponse getCertification(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		User user=getUser();
+		int imageLength=userFaceImagesService.findAllByUserId(user.getId()).size();
+		UserCertificationResponse userCertificationResponse=new UserCertificationResponse();
+		userCertificationResponse.setData(imageLength==1?1:0);
+		userCertificationResponse.setResponseCode(ResponseCode.SUCCESS);
+		return userCertificationResponse;
+	}
+
+	@RequestMapping(value = "/user/friends" ,method = RequestMethod.GET)
+	public UserFriendsResponse getContacts(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		User user=getUser();
+		UserFriendsResponse userFriendsResponse=customUserDetailsService.getUserFriendsResponse(user.getId(), qiniuService);
+		return userFriendsResponse;
+	}
+	@RequestMapping(value = "/user/friend/{userId}" ,method = RequestMethod.GET)
+	public UserFriendsResponse addFriends(@PathVariable Long userId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		User user=getUser();
+		UserFriendsResponse userFriendsResponse=customUserDetailsService.addFriends(user.getId(),userId, qiniuService);
+
+		push2Single.pushTransmissionTemplate(userId.toString(),"object");
+
+		return userFriendsResponse;
+	}
 	/**
 	 * 获取当前登录用户
 	 * @return User 用户实体
@@ -173,7 +252,8 @@ public class UserController extends BaseController {
 		UserBaseInfo userBaseInfo=new UserBaseInfo();
 		userBaseInfo.setId(user.getId());
 		userBaseInfo.setUserName(user.getUsername());
-		userBaseInfo.setNickName(user.getUserDetailInfoEntity().getNickName()==null ? "":user.getUserDetailInfoEntity().getNickName());
+		userBaseInfo.setNickName(user.getUserDetailInfoEntity().getNickName() == null ? "" : user.getUserDetailInfoEntity().getNickName());
+		userBaseInfo.setSecret(user.isSecret()?1:0);
 		userBaseInfo.setHeadImageUrl(UrlMapper.map2Url(user.getUserDetailInfoEntity().getHeadImageKey(),qiniuService));
 		return userBaseInfo;
 	}

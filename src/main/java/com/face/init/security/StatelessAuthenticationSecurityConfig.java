@@ -6,6 +6,7 @@ import com.face.filter.StatelessLoginFilter;
 import com.face.filter.TokenAuthenticationService;
 import com.face.service.qiniu.QiniuService;
 import com.face.service.user.CustomUserDetailsService;
+import com.face.service.user.UserFaceImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +35,8 @@ public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurer
 	public StatelessAuthenticationSecurityConfig() {
 		super(true);
 	}
-
+	@Autowired
+	UserFaceImagesService userFaceImagesService;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -63,17 +65,12 @@ public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurer
 				.antMatchers("/loginSuccess").hasAnyRole("USER", "ADMIN")
 				//defined Admin only API area
 				.antMatchers("/admin/**").hasRole("ADMIN")
-				
-				//all other request need to be authenticated
-				//.anyRequest().hasRole("USER").and()
 				.anyRequest().permitAll().and()//.hasAnyRole("USER", "ADMIN").and()
 				.addFilterBefore(usernamePasswordAuthenticationFilter,SecurityContextHolderAwareRequestFilter.class)
 				// custom JSON based authentication by POST of {"username":"<name>","password":"<password>"} which sets the token header upon authentication
-		        .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, customUserDetailsService, qiniuService,authenticationManager()), CustomUsernamePasswordAuthenticationFilter.class)
-
+		        .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, customUserDetailsService, userFaceImagesService,qiniuService,authenticationManager()), CustomUsernamePasswordAuthenticationFilter.class)
 				// custom Token based authentication based on the header previously given to the client
 				.addFilterAfter(new StatelessAuthenticationFilter(tokenAuthenticationService), CustomUsernamePasswordAuthenticationFilter.class);
-
 		System.out.println("-----------stateless");
 
 	}

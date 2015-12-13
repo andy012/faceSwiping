@@ -1,3 +1,9 @@
-2015-12-09 13:00:49,818 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
-2015-12-09 13:03:39,055 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
-2015-12-09 17:34:45,986 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
+2015-12-13 00:35:33,387 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
+2015-12-13 00:42:23,317 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
+2015-12-13 00:45:47,957 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
+2015-12-13 00:47:51,385 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
+2015-12-13 09:49:28,144 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'GE_TUI_CLIENT_ID' cannot be null
+2015-12-13 10:00:19,403 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
+2015-12-13 10:15:41,069 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
+2015-12-13 10:17:13,040 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
+2015-12-13 10:19:25,171 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null

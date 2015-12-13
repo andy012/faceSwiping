@@ -1,8 +1,11 @@
 package test.controller.user;
 
+import com.alibaba.fastjson.JSON;
+import com.face.data.user.UserSecretRequest;
 import com.face.init.Initializer;
 import com.face.init.config.WebAppConfig;
 import com.face.service.qiniu.QiniuService;
+import com.qiniu.util.Json;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,39 +72,27 @@ public class UserControllerTest {
     @Test
     public void testLogin(){
 
-        String loginData="{ \"username\":\"test1@face.com\", \"password\":\"pass\"}";
-
-
-//        try {
-//
-//            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/login").content(loginData).contentType(MediaType.APPLICATION_JSON)).andDo(MockMvcResultHandlers.print()).andReturn();
-//
+        String loginData="{ \"username\":\"1\", \"password\":\"1\"}";
+        try {
+            System.out.println(MediaType.APPLICATION_JSON);
+            System.out.println(loginData);
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/login").content(loginData).contentType(MediaType.APPLICATION_JSON)).andReturn();
 //            System.out.println(result.getRequest().getServerPort());
 //            System.out.println(result.getRequest().getRequestURL());
-//            System.out.println(result.getResponse().getHeader("X-AUTH-TOKEN"));
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-        try {
-            mockMvc.perform(MockMvcRequestBuilders.post("/j_spring_security_check")
-                    .param("j_username", "test1@face.com")
-                    .param("j_password", "pass"))
-
-                    .andDo(MockMvcResultHandlers.print());
+            X_AUTH_TOKEN=result.getResponse().getHeader("X-AUTH-TOKEN");
+            //System.out.println(result.getResponse().getHeader("X-AUTH-TOKEN"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         // doAuthenticatedExchange("test1@face.com",HttpMethod.GET,"api/users/current",null,"pass");
     }
 
+
     @Test
     public void testGetCurrentUser(){
-
+        testLogin();
       try {
-          MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/user/current").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
+          MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/user/currentUser").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
           System.out.println(result.getResponse().getContentAsString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -152,5 +143,65 @@ public class UserControllerTest {
 
     }
 
+    @Test
+    public void testChangeSecret() {
+        testLogin();
+        try {
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/user/secret/1").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
+            System.out.println(result.getResponse().getContentAsString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+
+
+    @Test
+    public void testChangeGetuiClientId() {
+        //System.out.println(JSON.toJSONString(userSecretRequest));
+        testLogin();
+        try {
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/user/getui/123234565").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
+            System.out.println(result.getResponse().getContentAsString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testGetuiSendSingle() {
+        //System.out.println(JSON.toJSONString(userSecretRequest));
+        testLogin();
+        try {
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/user/19/friend/image").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
+            System.out.println(result.getResponse().getContentAsString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void testGetCertification() {
+        //System.out.println(JSON.toJSONString(userSecretRequest));
+        testLogin();
+        try {
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/certification").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
+            System.out.println(result.getResponse().getContentAsString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testAddFriends() {
+        //System.out.println(JSON.toJSONString(userSecretRequest));
+        testLogin();
+        try {
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/friend/24").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
+            System.out.println(result.getResponse().getContentAsString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -39,17 +39,12 @@ import javax.servlet.annotation.WebListener;
 })
 @WebListener
 public class FaceControllerTest {
-
-
     String X_AUTH_TOKEN="eyJpZCI6MTksInVzZXJuYW1lIjoidGVzdDFAZmFjZS5jb20iLCJleHBpcmVzIjoxNDUwNDM3NDY3NDA0LCJyb2xlcyI6WyJVU0VSIl0sInNpbXBsZU9iamVjdCI6eyJpZEYiOjE5fX0=.cUZEfpMiWRicx7Avx3PAaeJN0zG9yUs61z7I8xHhBTg=";
-
     /**
      * 为controller注册过滤器
      */
     @Resource
     private FilterChainProxy springSecurityFilterChain;
-
-
     @Autowired
     private WebApplicationContext wac;
     private MockMvc mockMvc;
@@ -58,17 +53,14 @@ public class FaceControllerTest {
     QiniuService qiniuService;
     @Before
     public void setUp() {
-
         //Map<String,FilterRegistration> map=wac.getServletContext().getFilterRegistrations();
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).addFilters(springSecurityFilterChain).build();
       //  System.out.println(wac.getServletContext().getFilterRegistration("statelessAuthenticationFilter"));
-
     }
-
     @Test
     public void testLogin(){
 
-        String loginData="{ \"username\":\"zhoujielun@face.com\", \"password\":\"pass\"}";
+        String loginData="{ \"username\":\"1\", \"password\":\"1\"}";
         try {
             System.out.println(MediaType.APPLICATION_JSON);
             System.out.println(loginData);
@@ -104,23 +96,20 @@ public class FaceControllerTest {
             e.printStackTrace();
         }
     }
-
-
     @Test
     public void testAddFace(){
-
-
-        //testLogin();
+        testLogin();
         UserFacesRequest userFacesRequest=new UserFacesRequest();
-//        userFacesRequest.addKey("zhoujielun1.jpg");
+        userFacesRequest.addKey("15900176-b0ba-4b32-b30f-1df3452218b0");
 //        userFacesRequest.addKey("zhoujielun1.jpg");
 //        userFacesRequest.addKey("zhoujielun2.jpg");
 //
 //        userFacesRequest.addKey("zhoujielun3.jpg");
 
-        userFacesRequest.addKey("dhgtest2.jpg");
-        userFacesRequest.addKey("dhgtest3.jpg");
-        userFacesRequest.addKey("dhgtest4.jpg");
+        System.out.println(JSON.toJSONString(userFacesRequest));
+//        userFacesRequest.addKey("dhgtest2.jpg");
+//        userFacesRequest.addKey("dhgtest3.jpg");
+       // userFacesRequest.addKey("dhgtest4.jpg");
         System.out.println(JSON.toJSONString(userFacesRequest));
         //userFacesRequest.addKey("dhgtest2.jpg");
         try {
@@ -152,19 +141,45 @@ public class FaceControllerTest {
     @Test
     public void testIdentifyFace(){
 
-
+        testLogin();
         UserFaceIdentifyRequest userFaceIdentifyRequest=new UserFaceIdentifyRequest();
-        userFaceIdentifyRequest.setKey("dhgtest.jpg");
+        userFaceIdentifyRequest.setKey("2.pic_thumb.jpg");
         System.out.println(JSON.toJSONString(userFaceIdentifyRequest));
         try {
             MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/face/identify").headers(getHttpHeaders()).content(JSON.toJSONString(userFaceIdentifyRequest)).contentType(MediaType.APPLICATION_JSON)).andDo(MockMvcResultHandlers.print()).andReturn();
-
         }catch (Exception e){
 
         }
 
     }
 
+
+    @Test
+    public void testDetectFace(){
+
+        testLogin();
+        UserFacesRequest userFacesRequest=new UserFacesRequest();
+        userFacesRequest.addKey("zhoujielunheying");
+        try {
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/face/detect").headers(getHttpHeaders()).content(JSON.toJSONString(userFacesRequest)).contentType(MediaType.APPLICATION_JSON)).andDo(MockMvcResultHandlers.print()).andReturn();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void testQiniuToken(){
+
+        testLogin();
+
+        try {
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/qiniu/token").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
 
 }

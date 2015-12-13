@@ -12,7 +12,8 @@
       <mapping class="com.face.model.user.UserEntity"/>
       <mapping class="com.face.model.user.UserDetailInfo"/>
       <mapping class="com.face.model.user.User"/>
-      <!-- DB schema will be updated if needed -->
+    <mapping class="com.face.model.user.UserRelationEntity"/>
+    <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>

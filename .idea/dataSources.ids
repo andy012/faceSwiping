@@ -15,6 +15,7 @@
       <column name="ACCOUNT_LOCKED" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="CREDENTIALS_EXPIRED" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="ACCOUNT_ENABLED" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="SECRET" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
       <primary-key name="PRIMARY" columns="ID"/>
       <index name="USERNAME" unique="true" columns="USERNAME"/>
     </table>
@@ -27,6 +28,7 @@
       <column name="USER_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
       <column name="NICK_NAME" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
       <column name="HEAD_IMAGE_KEY" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="GE_TUI_CLIENT_ID" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="USER_ID"/>
     </table>
     <table name="USER_FACE_IMAGES" schema="" catalog="faceSwiping" type="TABLE">
@@ -35,6 +37,14 @@
       <column name="IMAGE_KEY" sqlType="VARCHAR" precision="256" scale="0" nullable="false" jdbcType="12" remarks="5Zu+54mH55qEa2V5"/>
       <column name="FACE_ID" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <column name="CREATE_TIME" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
+    <table name="USER_RELATION" schema="" catalog="faceSwiping" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="USER_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" remarks="55So5oi3SUQ="/>
+      <column name="TARGET_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" remarks="5aW95Y+LSUQ="/>
+      <column name="ACCEPTED" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="5piv5ZCm6KKr5o6l5Y+XLDDooajnpLrmnKrmjqXlj5csMeihqOekuuW3suaOpeWPlw=="/>
+      <column name="UPDATE_TIME" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
     <table name="USER_SWIPING_IMAGES" schema="" catalog="faceSwiping" type="TABLE">
@@ -61,6 +71,7 @@
       <column name="ACCOUNT_LOCKED" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="CREDENTIALS_EXPIRED" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="ACCOUNT_ENABLED" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="SECRET" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
       <primary-key name="PRIMARY" columns="ID"/>
       <index name="USERNAME" unique="true" columns="USERNAME"/>
     </table>
@@ -73,6 +84,7 @@
       <column name="USER_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
       <column name="NICK_NAME" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
       <column name="HEAD_IMAGE_KEY" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="GE_TUI_CLIENT_ID" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="USER_ID"/>
     </table>
     <table name="USER_FACE_IMAGES" schema="" catalog="faceSwiping" type="TABLE">
@@ -81,6 +93,14 @@
       <column name="IMAGE_KEY" sqlType="VARCHAR" precision="256" scale="0" nullable="false" jdbcType="12" remarks="flt+SX5Hflp+RGtleQ=="/>
       <column name="FACE_ID" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <column name="CREATE_TIME" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
+    <table name="USER_RELATION" schema="" catalog="faceSwiping" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="USER_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" remarks="55So5oi3SUQ="/>
+      <column name="TARGET_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" remarks="5aW95Y+LSUQ="/>
+      <column name="ACCEPTED" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="5piv5ZCm6KKr5o6l5Y+XLDDooajnpLrmnKrmjqXlj5csMeihqOekuuW3suaOpeWPlw=="/>
+      <column name="UPDATE_TIME" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
     <table name="USER_SWIPING_IMAGES" schema="" catalog="faceSwiping" type="TABLE">

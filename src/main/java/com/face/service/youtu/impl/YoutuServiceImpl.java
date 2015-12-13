@@ -65,16 +65,32 @@ public class YoutuServiceImpl implements YoutuService{
     public UserAddFacesResponse AddFaceUrl(Long person_id, List<String> key_arr,UserFaceImagesService userFaceImagesService,QiniuService qiniuService) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException {
         List<String> url_arr= UrlMapper.map2Urls(key_arr,qiniuService);
         UserAddFacesResponse userAddFacesResponse=new UserAddFacesResponse();
-        if(userFaceImagesService.findAllByUserId(person_id).size()>0){
-            JSONObject jsonObject= youtu.AddFaceUrl(person_id.toString(),url_arr);
+        List<UserFaceImagesEntity>  userFaceImagesEntities=userFaceImagesService.findAllByUserId(person_id);
 
+        if(userFaceImagesEntities.size()>0){
+
+            //删除已经存在的人脸
+
+            List<String> old_faceId = new ArrayList<>();
+            for(UserFaceImagesEntity userFaceImagesEntity:userFaceImagesEntities){
+                old_faceId.add(userFaceImagesEntity.getFaceId());
+            }
+            //添加新的人脸
+            JSONObject  jsonObject= youtu.AddFaceUrl(person_id.toString(), url_arr);
             System.out.println(jsonObject);
             AddFacesResponse addFacesResponse=new ObjectMapper().readValue(jsonObject.toString(),AddFacesResponse.class);
 
+            if(addFacesResponse.getErrorcode()!=0){
+                userAddFacesResponse.setResponseCode(ResponseCode.FACE_DETECT_FAILED);
+                return userAddFacesResponse;
+            }
+            //删除已经存在的人脸
+            jsonObject=youtu.DelFace(person_id.toString(), old_faceId);
+            //DelPersonResponse delPersonResponse= new ObjectMapper().readValue(jsonObject.toString(),DelPersonResponse.class);
+            userFaceImagesService.deleteAllByUserId(person_id);
 
             for(int i=0;i<addFacesResponse.getFaceIds().size();++i){
                 FaceResultBean faceResultBean=new FaceResultBean();
-
                 if(addFacesResponse.getFaceIds().get(i)!="") {
                     UserFaceImagesEntity userFaceImagesEntity = new UserFaceImagesEntity();
                     userFaceImagesEntity.setUserId(person_id);
@@ -83,7 +99,6 @@ public class YoutuServiceImpl implements YoutuService{
                     userFaceImagesService.save(userFaceImagesEntity);
                     faceResultBean.setKey(key_arr.get(i));
                     faceResultBean.setResponseCode(ResponseCode.SUCCESS);
-
                 }else{
                     faceResultBean.setKey(key_arr.get(i));
                     faceResultBean.setErrorcode(addFacesResponse.getRetCodes().get(i));
@@ -91,63 +106,111 @@ public class YoutuServiceImpl implements YoutuService{
                 userAddFacesResponse.addFaceResultBean(faceResultBean);
             }
         }else {
+
             List<String> groupIds=new ArrayList<>();
             groupIds.add(GROUP_ID);
             NewPersonResponse newPersonReponse=null;
             JSONObject jsonObject=null;
-            int index=0;
-            do {
+            jsonObject= youtu.NewPersonUrl(url_arr.get(0), person_id.toString(), groupIds);
+            System.out.println(jsonObject);
+            newPersonReponse=new ObjectMapper().readValue(jsonObject.toString(), NewPersonResponse.class);
+            FaceResultBean faceResultBean=new FaceResultBean();
+            faceResultBean.setKey(key_arr.get(0));
+            if(newPersonReponse.getErrorcode()!=0){
+                //faceResultBean.setErrorcode(newPersonReponse.getErrorcode());
 
-                jsonObject= youtu.NewPersonUrl(url_arr.get(index++), person_id.toString(), groupIds);
-                System.out.println(jsonObject);
-                newPersonReponse=new ObjectMapper().readValue(jsonObject.toString(), NewPersonResponse.class);
-                FaceResultBean faceResultBean=new FaceResultBean();
-                faceResultBean.setKey(key_arr.get(index-1));
-                if(newPersonReponse.getErrorcode()!=0){
-                    faceResultBean.setErrorcode(newPersonReponse.getErrorcode());
+                if(newPersonReponse.getErrorcode()==-1302){
+
+
+                    jsonObject = youtu.DelPerson(person_id.toString());
+                    jsonObject= youtu.NewPersonUrl(url_arr.get(0), person_id.toString(), groupIds);
+                    newPersonReponse=new ObjectMapper().readValue(jsonObject.toString(), NewPersonResponse.class);
+
                 }else {
-                    faceResultBean.setResponseCode(ResponseCode.SUCCESS);
+                    faceResultBean.setErrorcode(newPersonReponse.getErrorcode());
                 }
-                userAddFacesResponse.addFaceResultBean(faceResultBean);
-            }while (newPersonReponse.getErrorcode()!=0 && index <url_arr.size());
 
+            }else if(newPersonReponse.getErrorcode()==0){
+                faceResultBean.setResponseCode(ResponseCode.SUCCESS);
+            }else{
+                faceResultBean.setErrorcode(newPersonReponse.getErrorcode());
+
+            }
+            userAddFacesResponse.addFaceResultBean(faceResultBean);
+
+
+
+            if(newPersonReponse.getErrorcode()!=0){
+
+                userAddFacesResponse.setResponseCode(ResponseCode.FACE_DETECT_FAILED);
+                return userAddFacesResponse;
+            }
             UserFaceImagesEntity userFaceImagesEntity1=new UserFaceImagesEntity();
             userFaceImagesEntity1.setUserId(person_id);
-            userFaceImagesEntity1.setImageKey(key_arr.get(index - 1));
+            userFaceImagesEntity1.setImageKey(key_arr.get(0));
             userFaceImagesEntity1.setFaceId(newPersonReponse.getFaceId());
             userFaceImagesService.save(userFaceImagesEntity1);
-            System.out.println("url_arr.subList(" + index + ","+url_arr.size()+")-->");
-            url_arr=url_arr.subList(index,url_arr.size());
+//            List<String> groupIds=new ArrayList<>();
+//            groupIds.add(GROUP_ID);
+//            NewPersonResponse newPersonReponse=null;
+//            JSONObject jsonObject=null;
+//            int index=0;
+//            do {
+//
+//                jsonObject= youtu.NewPersonUrl(url_arr.get(index++), person_id.toString(), groupIds);
+//                System.out.println(jsonObject);
+//                newPersonReponse=new ObjectMapper().readValue(jsonObject.toString(), NewPersonResponse.class);
+//                FaceResultBean faceResultBean=new FaceResultBean();
+//                faceResultBean.setKey(key_arr.get(index-1));
+//                if(newPersonReponse.getErrorcode()!=0){
+//                    faceResultBean.setErrorcode(newPersonReponse.getErrorcode());
+//                }else {
+//                    faceResultBean.setResponseCode(ResponseCode.SUCCESS);
+//                }
+//                userAddFacesResponse.addFaceResultBean(faceResultBean);
+//            }while (newPersonReponse.getErrorcode()!=0 && index <url_arr.size());
+//
+//
+//            UserFaceImagesEntity userFaceImagesEntity1=new UserFaceImagesEntity();
+//            userFaceImagesEntity1.setUserId(person_id);
+//            userFaceImagesEntity1.setImageKey(key_arr.get(index - 1));
+//            userFaceImagesEntity1.setFaceId(newPersonReponse.getFaceId());
+//            userFaceImagesService.save(userFaceImagesEntity1);
+//
+//
 
-            for(String url:url_arr){
-                System.out.println("-->"+url);
-            }
-            if(url_arr.size()>0) {
-                jsonObject =youtu.AddFaceUrl(person_id.toString(), url_arr);
-                AddFacesResponse addFacesResponse=new ObjectMapper().readValue(jsonObject.toString(), AddFacesResponse.class);
-                for(int i=0;i<addFacesResponse.getFaceIds().size();++i){
-                    FaceResultBean faceResultBean=new FaceResultBean();
-
-                    System.out.println("==>"+addFacesResponse.getFaceIds().get(i));
-                    if(addFacesResponse.getFaceIds().get(i)!="") {
-                        UserFaceImagesEntity userFaceImagesEntity = new UserFaceImagesEntity();
-                        userFaceImagesEntity.setUserId(person_id);
-                        userFaceImagesEntity.setImageKey(key_arr.get(i+index));
-                        userFaceImagesEntity.setFaceId(addFacesResponse.getFaceIds().get(i));
-                        userFaceImagesService.save(userFaceImagesEntity);
-                        faceResultBean.setKey(key_arr.get(i+index));
-                        faceResultBean.setResponseCode(ResponseCode.SUCCESS);
-                    }else{
-                        faceResultBean.setKey(key_arr.get(i+index));
-                        faceResultBean.setErrorcode(addFacesResponse.getRetCodes().get(i));
-                    }
-                    userAddFacesResponse.addFaceResultBean(faceResultBean);
-                }
-            }
+//            System.out.println("url_arr.subList(" + index + ","+url_arr.size()+")-->");
+//            url_arr=url_arr.subList(index,url_arr.size());
+//
+//            for(String url:url_arr){
+//                System.out.println("-->"+url);
+//            }
+//            if(url_arr.size()>0) {
+//                jsonObject =youtu.AddFaceUrl(person_id.toString(), url_arr);
+//                AddFacesResponse addFacesResponse=new ObjectMapper().readValue(jsonObject.toString(), AddFacesResponse.class);
+//                for(int i=0;i<addFacesResponse.getFaceIds().size();++i){
+//                    FaceResultBean faceResultBean=new FaceResultBean();
+//
+//                    System.out.println("==>"+addFacesResponse.getFaceIds().get(i));
+//                    if(addFacesResponse.getFaceIds().get(i)!="") {
+//                        UserFaceImagesEntity userFaceImagesEntity = new UserFaceImagesEntity();
+//                        userFaceImagesEntity.setUserId(person_id);
+//                        userFaceImagesEntity.setImageKey(key_arr.get(i+index));
+//                        userFaceImagesEntity.setFaceId(addFacesResponse.getFaceIds().get(i));
+//                        userFaceImagesService.save(userFaceImagesEntity);
+//                        faceResultBean.setKey(key_arr.get(i+index));
+//                        faceResultBean.setResponseCode(ResponseCode.SUCCESS);
+//                    }else{
+//                        faceResultBean.setKey(key_arr.get(i+index));
+//                        faceResultBean.setErrorcode(addFacesResponse.getRetCodes().get(i));
+//                    }
+//                    userAddFacesResponse.addFaceResultBean(faceResultBean);
+//                }
+//            }
         }
 
 
-        userAddFacesResponse.setResponseCode();
+        //userAddFacesResponse.setResponseCode();
         return userAddFacesResponse;
 
     }
@@ -161,8 +224,39 @@ public class YoutuServiceImpl implements YoutuService{
     }
 
     @Override
-    public UserFaceIdentifyResponse FaceIdentifyUrl(UserFaceIdentifyRequest userFaceIdentifyRequest) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException {
+    public UserFaceIdentifyResponse FaceIdentifyUrl(UserFaceIdentifyRequest userFaceIdentifyRequest,User myUser) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException {
         JSONObject re=youtu.FaceIdentifyUrl(UrlMapper.map2Url(userFaceIdentifyRequest.getKey(), qiniuService),GROUP_ID);
+
+        System.out.println(re);
+        IdentityFaceResponse identityFaceResponse=new ObjectMapper().readValue(re.toString(), IdentityFaceResponse.class);
+        UserFaceIdentifyResponse userFaceIdentifyResponse=new UserFaceIdentifyResponse();
+        /**
+         * 转化为用户基本信息
+         */
+        for(Candidate candidate:identityFaceResponse.getCandidates()){
+            User user=customUserDetailsService.findOne(Long.parseLong(candidate.getPersonId()));
+            FaceIdentifyUserBaseInfo faceIdentifyUserBaseInfo=new FaceIdentifyUserBaseInfo();
+            faceIdentifyUserBaseInfo.setConfidence(candidate.getConfidence());
+            faceIdentifyUserBaseInfo.setId(user.getId());
+            faceIdentifyUserBaseInfo.setNickName(user.getUserDetailInfoEntity().getNickName());
+            faceIdentifyUserBaseInfo.setUserName(user.getUsername());
+            faceIdentifyUserBaseInfo.setHeadImageUrl(qiniuService.createPrivateUrl(user.getUserDetailInfoEntity().getHeadImageKey()));
+            if(customUserDetailsService.getFriend(myUser.getId(),user.getId())!=null){
+                faceIdentifyUserBaseInfo.setIsFriends(1);
+            }else {
+                faceIdentifyUserBaseInfo.setIsFriends(0);
+            }
+            userFaceIdentifyResponse.add(faceIdentifyUserBaseInfo);
+        }
+        userFaceIdentifyResponse.setResponseCode(ResponseCode.SUCCESS);
+        return userFaceIdentifyResponse;
+    }
+
+    @Override
+    public UserFaceIdentifyResponse FaceIdentifyBase64(StringBuffer image_data,User myUser) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException {
+        JSONObject re=youtu.FaceIdentifyBase64(image_data, GROUP_ID);
+
+        //System.out.println(re);
         IdentityFaceResponse identityFaceResponse=new ObjectMapper().readValue(re.toString(), IdentityFaceResponse.class);
         UserFaceIdentifyResponse userFaceIdentifyResponse=new UserFaceIdentifyResponse();
 
@@ -177,6 +271,14 @@ public class YoutuServiceImpl implements YoutuService{
             faceIdentifyUserBaseInfo.setNickName(user.getUserDetailInfoEntity().getNickName());
             faceIdentifyUserBaseInfo.setUserName(user.getUsername());
             faceIdentifyUserBaseInfo.setHeadImageUrl(qiniuService.createPrivateUrl(user.getUserDetailInfoEntity().getHeadImageKey()));
+
+
+            UserFaceImagesEntity userFaceImagesEntity=userFaceImagesService.findAllByUserId(user.getId()).get(0);
+
+            faceIdentifyUserBaseInfo.setFaceImageUrl(qiniuService.createPrivateUrl(userFaceImagesEntity.getImageKey()));
+
+
+
             userFaceIdentifyResponse.add(faceIdentifyUserBaseInfo);
         }
         userFaceIdentifyResponse.setResponseCode(ResponseCode.SUCCESS);
@@ -189,7 +291,7 @@ public class YoutuServiceImpl implements YoutuService{
         List<UserFaceImagesEntity> userFaceImagesEntities=userFaceImagesService.findAllByUserId(person_id);
         List<String> face_ids_arr=new ArrayList<>();
         JSONObject jsonObject=null;
-        if(userFaceImagesEntities.size()==keys_arr.size()){
+        if(userFaceImagesEntities.size() <= keys_arr.size()){
             jsonObject = youtu.DelPerson(person_id.toString());
             DelPersonResponse delPersonResponse= new ObjectMapper().readValue(jsonObject.toString(),DelPersonResponse.class);
             userFaceImagesService.deleteAllByUserId(person_id);
@@ -204,8 +306,6 @@ public class YoutuServiceImpl implements YoutuService{
     }
 
     List<String> keys2faceIds(List<String> keys_arr,List<UserFaceImagesEntity> userFaceImagesEntities){
-
-
         List<String> faceIdsArr=new ArrayList<>();
 
         for(UserFaceImagesEntity userFaceImagesEntity:userFaceImagesEntities){

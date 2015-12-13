@@ -10,6 +10,25 @@ public class FaceIdentifyUserBaseInfo {
     private String nickName;
     private String headImageUrl;
     private Double confidence;
+    private String faceImageUrl;
+    private int isFriends;
+
+    public int getIsFriends() {
+        return isFriends;
+    }
+
+    public void setIsFriends(int isFriends) {
+        this.isFriends = isFriends;
+    }
+
+    public String getFaceImageUrl() {
+        return faceImageUrl;
+    }
+
+    public void setFaceImageUrl(String faceImageUrl) {
+        this.faceImageUrl = faceImageUrl;
+    }
+
     public Long getId() {
         return id;
     }

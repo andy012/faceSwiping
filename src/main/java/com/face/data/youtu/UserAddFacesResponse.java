@@ -2,7 +2,6 @@ package com.face.data.youtu;
 
 import com.face.data.base.DataBase;
 import com.face.data.util.ResponseCode;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,21 +11,17 @@ import java.util.List;
  */
 public class UserAddFacesResponse extends DataBase{
 
-    List<FaceResultBean> faceResultBeans=new ArrayList<>();
+    List<FaceResultBean> data =new ArrayList<>();
     private int count=0;
-    public List<FaceResultBean> getFaceResultBeans() {
-        return faceResultBeans;
+    public List<FaceResultBean> getData() {
+        return data;
     }
 
     public void addFaceResultBean(FaceResultBean faceResultBean){
-
-        this.faceResultBeans.add(faceResultBean);
-
+        this.data.add(faceResultBean);
     }
-
-
-    public void setFaceResultBeans(List<FaceResultBean> faceResultBeans) {
-        this.faceResultBeans = faceResultBeans;
+    public void setData(List<FaceResultBean> data) {
+        this.data = data;
     }
 
     public int getCount() {
@@ -39,10 +34,12 @@ public class UserAddFacesResponse extends DataBase{
 
     public void setResponseCode(){
 
-        for(FaceResultBean faceResultBean:faceResultBeans){
+        for(FaceResultBean faceResultBean: data){
             if(faceResultBean.getErrorcode()==0) count++;
         }
-        if(count==faceResultBeans.size()){
+        if(data.size()==0){
+            setResponseCode(ResponseCode.DATA_ZERO);
+        }else if(count== data.size()){
             this.errorcode= ResponseCode.SUCCESS.getCode();
             this.errormsg=ResponseCode.SUCCESS.getDescription();
         }else if(count>0){
@@ -53,5 +50,4 @@ public class UserAddFacesResponse extends DataBase{
             this.errormsg=ResponseCode.ALL_NOT_SUCCESS.getDescription();
         }
     }
-
 }

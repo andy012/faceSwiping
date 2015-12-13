@@ -38,11 +38,15 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="json" level="project" />
+    <orderEntry type="library" name="commons-codec-1.2" level="project" />
+    <orderEntry type="library" name="gexin-rp-sdk-base-4.0.0.3" level="project" />
+    <orderEntry type="library" name="gexin-rp-sdk-http-4.0.1.0" level="project" />
+    <orderEntry type="library" name="gexin-rp-sdk-template-4.0.0.3" level="project" />
+    <orderEntry type="library" name="jackson-all-1.8.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.7" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.2.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.2.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.2.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.2.2.RELEASE" level="project" />
@@ -97,6 +101,48 @@
       <library name="Maven: json:org.json:1.0.0">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/src/main/resources/libs/json.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-configuration:commons-configuration:1.6" level="project" />
+    <orderEntry type="library" name="Maven: commons-digester:commons-digester:1.8" level="project" />
+    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils-core:1.8.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.0.3" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: gexin-rp-sdk-base:org.gexin:1.0.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/resources/libs/gexin-rp-sdk-base-4.0.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: gexin-rp-sdk-http:org.gexin:1.0.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/resources/libs/gexin-rp-sdk-http-4.0.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: gexin-rp-sdk-template:org.gexin:1.0.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/resources/libs/gexin-rp-sdk-template-4.0.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:2.5.0" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: jackson-all:com.codehaus:1.0.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/resources/libs/jackson-all-1.8.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

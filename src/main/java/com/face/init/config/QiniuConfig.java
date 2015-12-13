@@ -27,8 +27,6 @@ public class QiniuConfig {
     private static  String DOMAIN_VALUE;
     private static  String BUCKET_VALUE;
 
-
-
     @Bean
     public Auth initAuthProperties(){
         DOMAIN_VALUE=env.getRequiredProperty(DOMAIN);

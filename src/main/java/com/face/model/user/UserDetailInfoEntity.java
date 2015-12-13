@@ -24,9 +24,12 @@ public class UserDetailInfoEntity implements Serializable {
     @Basic
     @Column(name = "HEAD_IMAGE_KEY", nullable = true, insertable = true, updatable = true, length = 256)
     private String headImageKey;
-
+    @Basic
+    @Column(name = "GE_TUI_CLIENT_ID", nullable = false, insertable = true, updatable = true, length = 50)
+    private String geTuiClientId;
 
     public UserDetailInfoEntity(){}
+
     public UserDetailInfoEntity(User user) {
         this.user = user;
     }
@@ -39,8 +42,8 @@ public class UserDetailInfoEntity implements Serializable {
         this.user = user;
     }
 
-
-
+    @Basic
+    @Column(name = "NICK_NAME", nullable = true, insertable = true, updatable = true, length = 50)
     public String getNickName() {
         return nickName;
     }
@@ -49,6 +52,8 @@ public class UserDetailInfoEntity implements Serializable {
         this.nickName = nickName;
     }
 
+       @Basic
+       @Column(name = "HEAD_IMAGE_KEY", nullable = true, insertable = true, updatable = true, length = 256)
        public String getHeadImageKey() {
         return headImageKey;
     }
@@ -69,12 +74,18 @@ public class UserDetailInfoEntity implements Serializable {
 
         return true;
     }
-
     @Override
     public int hashCode() {
         int result = (int) (user.getId() ^ (user.getId() >>> 32));
         result = 31 * result + (nickName != null ? nickName.hashCode() : 0);
         result = 31 * result + (headImageKey != null ? headImageKey.hashCode() : 0);
         return result;
+    }
+       public String getGeTuiClientId() {
+        return geTuiClientId;
+    }
+
+    public void setGeTuiClientId(String geTuiClientId) {
+        this.geTuiClientId = geTuiClientId;
     }
 }

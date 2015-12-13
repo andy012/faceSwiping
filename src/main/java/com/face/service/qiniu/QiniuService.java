@@ -6,5 +6,5 @@ package com.face.service.qiniu;
 public interface QiniuService {
 
     public String createPrivateUrl(String key);
-
+    public String getToken();
 }

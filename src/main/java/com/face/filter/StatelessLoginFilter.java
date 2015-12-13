@@ -11,6 +11,7 @@ import com.face.model.user.User;
 import com.face.model.user.UserAuthentication;
 import com.face.service.qiniu.QiniuService;
 import com.face.service.user.CustomUserDetailsService;
+import com.face.service.user.UserFaceImagesService;
 import com.face.util.Base64;
 import com.face.util.Util;
 
@@ -40,16 +41,17 @@ public class StatelessLoginFilter extends AbstractAuthenticationProcessingFilter
 
 	private final TokenAuthenticationService tokenAuthenticationService;
 	private final CustomUserDetailsService customUserDetailsService;
-
+	private final UserFaceImagesService userFaceImagesService;
 
 	@Autowired
 	private QiniuService qiniuService;
 	public StatelessLoginFilter(String urlMapping, TokenAuthenticationService tokenAuthenticationService,
-								CustomUserDetailsService customUserDetailsService,QiniuService qiniuService,
+								CustomUserDetailsService customUserDetailsService,UserFaceImagesService userFaceImagesService,QiniuService qiniuService,
 								AuthenticationManager authManager) {
 		super(new AntPathRequestMatcher(urlMapping));
 		this.customUserDetailsService = customUserDetailsService;
 		this.tokenAuthenticationService = tokenAuthenticationService;
+		this.userFaceImagesService=userFaceImagesService;
 		this.qiniuService=qiniuService;
 		setAuthenticationManager(authManager);
 
@@ -110,7 +112,8 @@ public class StatelessLoginFilter extends AbstractAuthenticationProcessingFilter
 		PrintWriter pw = response.getWriter();
 
 		UserLoginResponse userLoginResponse=new UserLoginResponse();
-		userLoginResponse.setUser(userAuthentication.getDetails(),qiniuService);
+		userLoginResponse.setUser(userAuthentication.getDetails(),qiniuService,userFaceImagesService);
+
 		userLoginResponse.setResponseCode(ResponseCode.SUCCESS);
 		System.out.println("login success :--->" + JSON.toJSONString(userLoginResponse));
 		pw.write(JSON.toJSONString(userLoginResponse));

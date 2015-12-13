@@ -18,9 +18,18 @@ public class QiniuServiceImpl implements QiniuService {
 
     @Override
     public String createPrivateUrl(String key) {
-        return auth.privateDownloadUrl(QiniuConfig.getDomainValue()+key);
+
+
+        return QiniuConfig.getDomainValue()+key;
+        //return auth.privateDownloadUrl(QiniuConfig.getDomainValue()+key);
     }
 
+    @Override
+    public String getToken() {
+
+      //  System.out.println("--->"+QiniuConfig.getBucketValue());
+        return auth.uploadToken(QiniuConfig.getBucketValue());
+    }
 
 
 }

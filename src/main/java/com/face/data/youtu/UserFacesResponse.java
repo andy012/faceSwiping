@@ -2,7 +2,6 @@ package com.face.data.youtu;
 
 import com.face.data.base.DataBase;
 import com.face.data.util.ResponseCode;
-import javafx.scene.chart.PieChart;
 
 import java.util.LinkedHashMap;
 
@@ -11,27 +10,27 @@ import java.util.LinkedHashMap;
  */
 public class UserFacesResponse extends DataBase{
 
-    private LinkedHashMap<String ,String> facesUrlMap=new LinkedHashMap<>();
+    private LinkedHashMap<String ,String> data =new LinkedHashMap<>();
 
     public UserFacesResponse(){}
-    public UserFacesResponse(LinkedHashMap<String ,String> facesUrlMap){
-        this.facesUrlMap=facesUrlMap;
+    public UserFacesResponse(LinkedHashMap<String ,String> data){
+        this.data = data;
         setResponseCode();
 
     }
-    public LinkedHashMap<String, String> getFacesUrlMap() {
-        return facesUrlMap;
+    public LinkedHashMap<String, String> getData() {
+        return data;
     }
 
-    public void setFacesUrlMap(LinkedHashMap<String, String> facesUrlMap) {
-        this.facesUrlMap = facesUrlMap;
+    public void setData(LinkedHashMap<String, String> data) {
+        this.data = data;
     }
 
     public void setResponseCode(){
-        if(facesUrlMap.size()==0){
+        if(data.size()==0){
             this.errorcode=ResponseCode.DATA_ZERO.getCode();
             this.errormsg=ResponseCode.DATA_ZERO.getDescription();
-        }else if(facesUrlMap.size()>0){
+        }else if(data.size()>0){
             this.errorcode=ResponseCode.SUCCESS.getCode();
             this.errormsg=ResponseCode.SUCCESS.getDescription();
         }

@@ -398,6 +398,17 @@ public class Youtu {
 
 		return respose;
 	}
+	public JSONObject FaceIdentifyBase64(StringBuffer image_data, String group_id)
+			throws IOException, JSONException, KeyManagementException, NoSuchAlgorithmException {
+		JSONObject data = new JSONObject();
+		data.put("image", image_data.toString());
+		image_data.setLength(0);
+		data.put("group_id", group_id);
+
+		JSONObject respose =m_use_youtu?SendHttpRequest(data, "api/faceidentify"):SendHttpsRequest(data, "api/faceidentify");
+
+		return respose;
+	}
 
 	public JSONObject FaceIdentifyUrl(String url, String group_id)
 	throws IOException, JSONException, KeyManagementException, NoSuchAlgorithmException {

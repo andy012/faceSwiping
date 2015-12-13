@@ -7,8 +7,6 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>Face Swiping Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-
-
 	<!-- Properties and Version Information of dependencies -->
 	<properties>
 		<!-- Spring -->
@@ -27,7 +25,6 @@
 		<!-- Hibernate -->
 		<hibernate.version>4.2.2.Final</hibernate.version>
 		<hibernate.validator.version>4.3.1.Final</hibernate.validator.version>
-
 		<!-- Plugins -->
 		<tomcat.maven.plugin.version>2.2</tomcat.maven.plugin.version>
 		<jetty.maven.plugin.version>8.1.12.v20130726</jetty.maven.plugin.version>
@@ -46,7 +43,7 @@
 		<junit.version>4.9</junit.version>
 		<mockito.version>1.9.5</mockito.version>
 		<powermockito.version>1.5.1</powermockito.version>
-		
+
 		<!-- Java Doc -->
 		<java.doc.version>2.9.1</java.doc.version>
 	</properties>
@@ -101,6 +98,8 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+
+
 
 
 		<!-- SPRING 4: MailService based javamail-->
@@ -300,6 +299,59 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/resources/libs/json.jar</systemPath>
 		</dependency>
+
+
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>gexin-rp-sdk-base</groupId>
+			<artifactId>org.gexin</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/libs/gexin-rp-sdk-base-4.0.0.3.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>gexin-rp-sdk-http</groupId>
+			<artifactId>org.gexin</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/libs/gexin-rp-sdk-http-4.0.1.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>gexin-rp-sdk-template</groupId>
+			<artifactId>org.gexin</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/libs/gexin-rp-sdk-template-4.0.0.3.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jackson-all</groupId>
+			<artifactId>com.codehaus</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/libs/jackson-all-1.8.5.jar</systemPath>
+		</dependency>
 		<!--<dependency>-->
 			<!--<groupId>youtu-java-sdk</groupId>-->
 			<!--<artifactId>com.youtu</artifactId>-->
@@ -307,6 +359,7 @@
 			<!--<scope>system</scope>-->
 			<!--<systemPath>${project.basedir}/src/main/resources/libs/youtu-java-sdk.jar</systemPath>-->
 		<!--</dependency>-->
+
 
 		<dependency>
 			<groupId>com.qiniu</groupId>
@@ -330,6 +383,50 @@
 					<port>8080</port>
 					<path>/</path>
 					<contextFile>src/main/resources/context/context.xml</contextFile>
+				</configuration>
+			</plugin>
+
+
+
+			<!-- Jetty 8 plugin -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.maven.plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.jetty</groupId>
+						<artifactId>jetty-deploy</artifactId>
+						<version>${jetty.maven.plugin.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.jetty</groupId>
+						<artifactId>jetty-jndi</artifactId>
+						<version>${jetty.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.jetty</groupId>
+						<artifactId>jetty-plus</artifactId>
+						<version>${jetty.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${mysql.connector.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<webAppConfig>
+						<contextPath>/</contextPath>
+					</webAppConfig>
+					<jettyConfig>src/main/resources/context/jetty.xml</jettyConfig>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>8080</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
 				</configuration>
 			</plugin>
 			<!-- Cobertura Code Coverage -->
@@ -415,9 +512,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
-
-
-
 </project>

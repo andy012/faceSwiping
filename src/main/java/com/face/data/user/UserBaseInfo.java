@@ -9,7 +9,9 @@ public class UserBaseInfo {
     private String userName;
     private String nickName;
     private String headImageUrl;
-
+    private String certificationImageUrl;
+    private int secret;
+    private int certification;
     public Long getId() {
         return id;
     }
@@ -38,8 +40,30 @@ public class UserBaseInfo {
         return headImageUrl;
     }
 
+    public String getCertificationImageUrl() {
+        return certificationImageUrl;
+    }
+
+    public void setCertificationImageUrl(String certificationImageUrl) {
+        this.certificationImageUrl = certificationImageUrl;
+    }
+
     public void setHeadImageUrl(String headImageUrl) {
         this.headImageUrl = headImageUrl;
+    }
+    public int getSecret() {
+        return secret;
+    }
+    public void setSecret(int secret) {
+        this.secret = secret;
+    }
+
+    public int getCertification() {
+        return certification;
+    }
+
+    public void setCertification(int certification) {
+        this.certification = certification;
     }
 
     @Override

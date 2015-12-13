@@ -1,0 +1,1 @@
+2015-12-12 15:21:56,223 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Unknown column 'userdetail0_.geTuiClientId' in 'field list'

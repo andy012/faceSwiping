@@ -1,0 +1,188 @@
+-- MySQL dump 10.13  Distrib 5.7.9, for Linux (x86_64)
+--
+-- Host: localhost    Database: faceSwiping
+-- ------------------------------------------------------
+-- Server version	5.7.9
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `USER`
+--
+
+DROP TABLE IF EXISTS `USER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `USER` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `PASSWORD` varchar(255) DEFAULT NULL,
+  `USERNAME` varchar(50) DEFAULT NULL,
+  `ACCOUNT_EXPIRED` tinyint(1) NOT NULL,
+  `ACCOUNT_LOCKED` tinyint(1) NOT NULL,
+  `CREDENTIALS_EXPIRED` tinyint(1) NOT NULL,
+  `ACCOUNT_ENABLED` tinyint(1) NOT NULL,
+  `SECRET` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `USERNAME` (`USERNAME`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `USER`
+--
+
+LOCK TABLES `USER` WRITE;
+/*!40000 ALTER TABLE `USER` DISABLE KEYS */;
+INSERT INTO `USER` VALUES (19,'$2a$10$BurEpall6TUYamAbreg5KuBYX0Ez6eN1tZDx5dt.My4MU1c0pPhz2','test1@face.com',0,0,0,0,0),(20,'$2a$10$Mff/z9N81q/6z8b4pAG0vOHP377aDlOpshbZgMVhAL3upvPtBoZ7K','zhoujielun@face.com',0,0,0,0,1),(22,'$2a$10$7eOPQ52l7gQanm58C2sw7OB3ClFb6yTzUb4uLmED4NqqGtrSWpH4K','1',0,0,0,0,1),(23,'$2a$10$gB4DUYmm0duCCp7ZVzoEsOAjmwe9ETwNQzazA.47/wMw9JqlGX966','Judy',0,0,0,0,0),(24,'$2a$10$hN8yhEOtCedo3pBIC5PTtusDfVGWmw2WFR.gvn5Cyd9I3R8ktZp4a','Andy',0,0,0,0,0),(25,'$2a$10$IqmqAhnsh/OdOwxWXvuQ3.a96VNbg.InCx2wqWx3nSPvzrcfE9tny','Red Light',0,0,0,0,0),(26,'$2a$10$7Deyx5XBjRNXIDKQGsFP4OpH7rsJwa2I8zZ2vUAkmp79MkSDGdWIG','Jimmy',0,0,0,0,0),(27,'$2a$10$XIeKh1KVPLainVRgNWWHlOWXI2jJLXgX/KnfSe.UZoSihSYBu6yem','Kindy',0,0,0,0,0);
+/*!40000 ALTER TABLE `USER` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `USER_AUTHORITY`
+--
+
+DROP TABLE IF EXISTS `USER_AUTHORITY`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `USER_AUTHORITY` (
+  `USER_ID` bigint(20) NOT NULL,
+  `AUTHORITY` varchar(20) NOT NULL,
+  PRIMARY KEY (`USER_ID`,`AUTHORITY`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `USER_AUTHORITY`
+--
+
+LOCK TABLES `USER_AUTHORITY` WRITE;
+/*!40000 ALTER TABLE `USER_AUTHORITY` DISABLE KEYS */;
+INSERT INTO `USER_AUTHORITY` VALUES (19,'ROLE_USER'),(20,'ROLE_USER'),(22,'ROLE_USER'),(23,'ROLE_USER'),(24,'ROLE_USER'),(25,'ROLE_USER'),(26,'ROLE_USER'),(27,'ROLE_USER');
+/*!40000 ALTER TABLE `USER_AUTHORITY` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `USER_DETAIL_INFO`
+--
+
+DROP TABLE IF EXISTS `USER_DETAIL_INFO`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `USER_DETAIL_INFO` (
+  `USER_ID` bigint(20) NOT NULL,
+  `NICK_NAME` varchar(50) DEFAULT NULL,
+  `HEAD_IMAGE_KEY` varchar(256) DEFAULT NULL,
+  `GE_TUI_CLIENT_ID` varchar(50) NOT NULL,
+  PRIMARY KEY (`USER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `USER_DETAIL_INFO`
+--
+
+LOCK TABLES `USER_DETAIL_INFO` WRITE;
+/*!40000 ALTER TABLE `USER_DETAIL_INFO` DISABLE KEYS */;
+INSERT INTO `USER_DETAIL_INFO` VALUES (19,'Andy','dhgtest.jpg',''),(20,'Jay Chou','zhoujielun2.jpg','123234565'),(22,NULL,NULL,''),(23,'Judy','2c8b6a53-64d9-4ec4-a934-ac0eeef3ba48.png',''),(24,'Andy','e7d178d5-fa2f-4147-905a-dc7e5242d1ab.png',''),(25,'Red Light','1b43f2a6-3ccc-4069-be17-c2683d0cfbc9.png',''),(26,'Jimmy','2c19f065-f453-4720-bc87-f3d0173d424b.png',''),(27,'Kindy','5703dbce-f7d4-4817-af2f-310502e41e63.png','');
+/*!40000 ALTER TABLE `USER_DETAIL_INFO` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `USER_FACE_IMAGES`
+--
+
+DROP TABLE IF EXISTS `USER_FACE_IMAGES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `USER_FACE_IMAGES` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `USER_ID` bigint(20) NOT NULL,
+  `IMAGE_KEY` varchar(256) NOT NULL COMMENT '图片的key',
+  `FACE_ID` varchar(50) NOT NULL,
+  `CREATE_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `USER_FACE_IMAGES`
+--
+
+LOCK TABLES `USER_FACE_IMAGES` WRITE;
+/*!40000 ALTER TABLE `USER_FACE_IMAGES` DISABLE KEYS */;
+INSERT INTO `USER_FACE_IMAGES` VALUES (46,19,'dhgtest2.jpg','1293660768163659775','2015-12-10 02:56:34'),(47,19,'dhgtest4.jpg','1293660839624114175','2015-12-10 02:56:35'),(54,22,'7f8a7b98-b58f-4872-b697-3a584044c94a','1298054285933740031','2015-12-13 03:41:05');
+/*!40000 ALTER TABLE `USER_FACE_IMAGES` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `USER_RELATION`
+--
+
+DROP TABLE IF EXISTS `USER_RELATION`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `USER_RELATION` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `USER_ID` bigint(20) NOT NULL COMMENT '用户ID',
+  `TARGET_ID` bigint(20) NOT NULL COMMENT '好友ID',
+  `ACCEPTED` tinyint(1) NOT NULL COMMENT '是否被接受,0表示未接受,1表示已接受',
+  `UPDATE_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `USER_RELATION`
+--
+
+LOCK TABLES `USER_RELATION` WRITE;
+/*!40000 ALTER TABLE `USER_RELATION` DISABLE KEYS */;
+INSERT INTO `USER_RELATION` VALUES (1,20,23,1,'2015-12-13 05:49:15'),(2,20,24,1,'2015-12-13 05:50:02'),(3,20,25,1,'2015-12-13 05:50:45'),(4,22,23,1,'2015-12-13 05:55:41'),(5,22,24,1,'2015-12-13 05:57:09');
+/*!40000 ALTER TABLE `USER_RELATION` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `USER_SWIPING_IMAGES`
+--
+
+DROP TABLE IF EXISTS `USER_SWIPING_IMAGES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `USER_SWIPING_IMAGES` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `USER_ID` bigint(20) NOT NULL,
+  `IMAGE_KEY` varchar(256) NOT NULL COMMENT '图片的key',
+  `FACE_ID` varchar(50) NOT NULL,
+  `CREATE_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `USER_SWIPING_IMAGES`
+--
+
+LOCK TABLES `USER_SWIPING_IMAGES` WRITE;
+/*!40000 ALTER TABLE `USER_SWIPING_IMAGES` DISABLE KEYS */;
+/*!40000 ALTER TABLE `USER_SWIPING_IMAGES` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-12-13  6:48:42

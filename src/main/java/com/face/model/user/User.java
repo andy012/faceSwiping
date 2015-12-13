@@ -1,5 +1,6 @@
 package com.face.model.user;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -32,24 +33,34 @@ public class User implements UserDetails {
 	private String password;
 	@Transient
 	private long expires;
+	@JSONField(serialize = false)
 	@NotNull
 	@Column(name = "ACCOUNT_EXPIRED", nullable = false)
 	private boolean accountExpired;
+	@JSONField(serialize = false)
 	@NotNull
 	@Column(name = "ACCOUNT_LOCKED", nullable = false)
-
 	private boolean accountLocked;
+	@JSONField(serialize = false)
 	@NotNull
 	@Column(name = "CREDENTIALS_EXPIRED", nullable = false)
 
 	private boolean credentialsExpired;
+	@JSONField(serialize = false)
 	@NotNull
 	@Column(name = "ACCOUNT_ENABLED", nullable = false)
 	private boolean accountEnabled;
+	@JSONField(serialize = false)
+	@NotNull
+	@Column(name = "SECRET", nullable = false)
+	private boolean secret;
 	@Transient
 	private String newPassword;
+	@JSONField(serialize = false)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
 	private Set<UserAuthority> authorities;
+
+	@JSONField(serialize = false)
 	@OneToOne(mappedBy = "user",cascade = {CascadeType.ALL})
 	private UserDetailInfoEntity userDetailInfoEntity;
 
@@ -76,7 +87,6 @@ public class User implements UserDetails {
 	public UserDetailInfoEntity getUserDetailInfoEntity() {
 		return userDetailInfoEntity;
 	}
-
 	public void setUserDetailInfoEntity(UserDetailInfoEntity userDetailInfoEntity) {
 		this.userDetailInfoEntity = userDetailInfoEntity;
 	}
@@ -182,6 +192,14 @@ public class User implements UserDetails {
 	public boolean isCredentialsNonExpired() {
 		return !credentialsExpired;
 	}
+	@JsonIgnore
+	public boolean isSecret() {
+		return secret;
+	}
+
+	public void setSecret(boolean secret) {
+		this.secret = secret;
+	}
 
 	@Override
 	@JsonIgnore
@@ -219,17 +237,5 @@ public class User implements UserDetails {
 	public String toString() {
 		return getClass().getSimpleName() + ": " + getUsername();
 	}
-	
-	@Transient
-	public Map<String, Object> getSimpleObject(){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("idF", id);
-		//map.put("companyIdF", companyId);
-//		if (Util.isNotEmpty(company)) {
-//			map.put("shotCompanyNameF", company.getShotCompanyNameF());
-//			map.put("companyNameF", company.getCompanyNameF());
-//			map.put("logoIamgeF", company.getLogoIamgeF());
-//		}
-		return map;
-	}
+
 }

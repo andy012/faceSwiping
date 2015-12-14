@@ -26,18 +26,16 @@ public class UserServiceTest {
 
         User user=new User();
 
-
-
         //设置密码
         BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
         System.out.println(bCryptPasswordEncoder.encode("1"));
 
         user.setPassword(bCryptPasswordEncoder.encode("1"));
         System.out.println(user.getPassword());
-        user.setUsername("Kindy");
+        user.setUsername("BabyYan");
         user.setExpires(100000L);
         user.getUserDetailInfoEntity().setGeTuiClientId("");
-        user.getUserDetailInfoEntity().setHeadImageKey("5703dbce-f7d4-4817-af2f-310502e41e63.png");
+        user.getUserDetailInfoEntity().setHeadImageKey("h_large_FVGD_680f0003acd9111a.jpg");
         user.getUserDetailInfoEntity().setNickName(user.getUsername());
         user.grantRole(UserRole.USER);
         System.out.println(user);

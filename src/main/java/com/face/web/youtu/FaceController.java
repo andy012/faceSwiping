@@ -92,7 +92,7 @@ public class FaceController extends BaseController{
             e.printStackTrace();
         }
         UserAddFacesResponseOne userAddFacesResponseOne = new UserAddFacesResponseOne();
-        if(userAddFacesResponse.getData().size()>0) {
+        if(userAddFacesResponse.getErrorcode()==0) {
             userAddFacesResponseOne.setData(qiniuService.createPrivateUrl(userAddFacesResponse.getData().get(0).getKey()));
             userAddFacesResponseOne.setResponseCode(ResponseCode.SUCCESS);
         }else {
@@ -141,30 +141,38 @@ public class FaceController extends BaseController{
         UserFacesResponse userFacesResponse=new UserFacesResponse(UrlMapper.linkedHashMap2Urls(userFaceImagesEntities,qiniuService));
         return userFacesResponse;//re.toString();
     }
-    @RequestMapping(value = "/user/face/identify",method = RequestMethod.GET)
-    public UserFaceIdentifyResponseArray faceIdentify(HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "/user/face/identify/{key}",method = RequestMethod.GET)
+    public UserFaceIdentifyResponseArray faceIdentify(@PathVariable String key, HttpServletRequest request, HttpServletResponse response){
+        System.out.println("***********************************");
         UserFaceIdentifyResponseArray userFaceIdentifyResponseArray=new UserFaceIdentifyResponseArray();
-        try {
-            UserFaceIdentifyRequest userFaceIdentifyRequest= new ObjectMapper().readValue(request.getInputStream(), UserFaceIdentifyRequest.class);
-            String url=qiniuService.createPrivateUrl(userFaceIdentifyRequest.getKey());
-            JSONObject re=youtuService.DetectFaceURL(url, 0);
-            DetectionFaceResponse detectionFaceResponse=new ObjectMapper().readValue(re.toString(), DetectionFaceResponse.class);
-            //CutPicture.findAllFaces(url,detectionFaceResponse);
-            BufferedImage bufferedImage=CutPicture.getBufferImageByUser(url);
-            StringBuffer stringBuffer=new StringBuffer();
-            for(DetectionFaceResponse.FaceEntity faceEntity:detectionFaceResponse.getFace()){
-                stringBuffer.append(CutPicture.cropImage(bufferedImage, faceEntity.getX(), faceEntity.getY(), faceEntity.getWidth(), faceEntity.getHeight()));
-                //System.out.println(stringBuffer.toString());
-                UserFaceIdentifyResponse userFaceIdentifyResponse=null;
 
-                userFaceIdentifyResponse=youtuService.FaceIdentifyBase64(stringBuffer,getUser());
-                userFaceIdentifyResponse.setX(faceEntity.getX());userFaceIdentifyResponse.setY(faceEntity.getY());
-                userFaceIdentifyResponse.setWidth(faceEntity.getWidth());userFaceIdentifyResponse.setHeight(faceEntity.getHeight());
-                //System.out.println(JSON.toJSONString(faceEntity));
-                //System.out.println(JSON.toJSONString(userFaceIdentifyResponse));
-                userFaceIdentifyResponseArray.add(userFaceIdentifyResponse);
-            }
-            //userFaceIdentifyResponse=youtuService.FaceIdentifyUrl(userFaceIdentifyRequest);
+        UserFaceIdentifyRequest userFaceIdentifyRequest=new UserFaceIdentifyRequest();
+        userFaceIdentifyRequest.setKey(key);
+
+        try {
+            //UserFaceIdentifyRequest userFaceIdentifyRequest= new ObjectMapper().readValue(request.getInputStream(), UserFaceIdentifyRequest.class);
+            String url=qiniuService.createPrivateUrl(key);
+            JSONObject re=youtuService.DetectFaceURL(url, 0);
+//            DetectionFaceResponse detectionFaceResponse=new ObjectMapper().readValue(re.toString(), DetectionFaceResponse.class);
+//            //CutPicture.findAllFaces(url,detectionFaceResponse);
+//            BufferedImage bufferedImage=CutPicture.getBufferImageByUser(url);
+//            StringBuffer stringBuffer=new StringBuffer();
+//            for(DetectionFaceResponse.FaceEntity faceEntity:detectionFaceResponse.getFace()){
+//                stringBuffer.append(CutPicture.cropImage(bufferedImage, faceEntity.getX(), faceEntity.getY(), faceEntity.getWidth(), faceEntity.getHeight()));
+//                //System.out.println(stringBuffer.toString());
+//                UserFaceIdentifyResponse userFaceIdentifyResponse=null;
+//                userFaceIdentifyResponse=youtuService.FaceIdentifyBase64(stringBuffer,getUser());
+//                userFaceIdentifyResponse.setX(faceEntity.getX());userFaceIdentifyResponse.setY(faceEntity.getY());
+//                userFaceIdentifyResponse.setWidth(faceEntity.getWidth());userFaceIdentifyResponse.setHeight(faceEntity.getHeight());
+//                //System.out.println(JSON.toJSONString(faceEntity));
+//                //System.out.println(JSON.toJSONString(userFaceIdentifyResponse));
+//                userFaceIdentifyResponseArray.add(userFaceIdentifyResponse);
+//            }
+            UserFaceIdentifyResponse userFaceIdentifyResponse=youtuService.FaceIdentifyUrl(userFaceIdentifyRequest,getUser());
+
+            userFaceIdentifyResponseArray.add(userFaceIdentifyResponse);
+
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
@@ -174,13 +182,12 @@ public class FaceController extends BaseController{
         } catch (KeyManagementException e) {
             e.printStackTrace();
         }
+        System.out.println(JSON.toJSONString(userFaceIdentifyResponseArray));
         return userFaceIdentifyResponseArray;
     }
 
-
     @RequestMapping(value = "/user/face/identifyOne",method = RequestMethod.GET)
     public UserFaceIdentifyResponseOne faceIdentifyOne(HttpServletRequest request, HttpServletResponse response){
-
         UserFaceIdentifyResponse userFaceIdentifyResponse=null;
         try {
             UserFaceIdentifyRequest userFaceIdentifyRequest= new ObjectMapper().readValue(request.getInputStream(), UserFaceIdentifyRequest.class);

@@ -1,16 +1,14 @@
 package com.face.web.user;
 
+import com.alibaba.fastjson.JSON;
 import com.face.data.mapper.UrlMapper;
 import com.face.data.user.*;
 import com.face.data.util.ResponseCode;
 import com.face.data.youtu.UserAddFacesResponse;
 import com.face.data.youtu.UserFaceIdentifyRequest;
 import com.face.model.common.ResultInfo;
-import com.face.model.user.User;
-import com.face.model.user.UserAuthentication;
-import com.face.model.user.UserFaceImagesEntity;
+import com.face.model.user.*;
 import com.face.repository.user.UserRepository;
-import com.face.model.user.UserRole;
 import com.face.service.getui.Push2Single;
 import com.face.service.qiniu.QiniuService;
 import com.face.service.user.CustomUserDetailsService;
@@ -121,8 +119,6 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String createAccount(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("rpassword") String rpassword, HttpServletRequest request, HttpServletResponse response,ModelMap model) throws UnsupportedEncodingException {
-
-
 		String phone=request.getParameter("phone");
 		try {
 			if (password.trim().equals(rpassword.trim()) == false) {
@@ -195,24 +191,74 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "/user/{userId}/friend/{key}" ,method = RequestMethod.POST)
 	public UserAddFriendsResponse requestAddFriends(@PathVariable Long userId,@PathVariable String key,HttpServletRequest request, HttpServletResponse response) throws IOException {
+
 		User user=getUser();
+		UserRelationEntity userRelationEntity=customUserDetailsService.getFriend(user.getId(), userId);
+
+		if(userRelationEntity==null) {
+			userRelationEntity = new UserRelationEntity();
+			userRelationEntity.setTargetId(userId);
+			userRelationEntity.setUserId(user.getId());
+		}
+
+		User realUser = customUserDetailsService.findOne(user.getId());
 		User otherUser = customUserDetailsService.findOne(userId);
 		UserAddFriendsRequest userAddFriendsRequest=new UserAddFriendsRequest();
 		userAddFriendsRequest.setImageUrl(qiniuService.createPrivateUrl(key));
-		userAddFriendsRequest.setUserId(userId.toString());
-		IPushResult ret =push2Single.pushTransmissionTemplate(otherUser.getUserDetailInfoEntity().getGeTuiClientId(),userAddFriendsRequest);
+		userAddFriendsRequest.setUserId(user.getId());
+
+		List<UserFaceImagesEntity> userFaceImagesEntities=userFaceImagesService.findAllByUserId(realUser.getId());
+
+		System.out.println("------------"+userFaceImagesEntities.size());
+		if(userFaceImagesEntities.size()>0) {
+			userAddFriendsRequest.setHeadImageUrl(qiniuService.createPrivateUrl(userFaceImagesEntities.get(0).getImageKey()));
+		}else {
+			userAddFriendsRequest.setHeadImageUrl(qiniuService.createPrivateUrl(realUser.getUserDetailInfoEntity().getHeadImageKey()));
+		}
+		userAddFriendsRequest.setUserName(realUser.getUsername());
+		userAddFriendsRequest.setNickName(realUser.getUserDetailInfoEntity().getNickName());
+		userRelationEntity.setRequestData(JSON.toJSONString(userAddFriendsRequest));
+		customUserDetailsService.save(userRelationEntity);
+		IPushResult ret =push2Single.pushTransmissionTemplate(otherUser.getUserDetailInfoEntity().getGeTuiClientId(),"请求添加好友");
 		System.out.println("正常：" + ret.getResponse().toString());
 		UserAddFriendsResponse userAddFriendsResponse=new UserAddFriendsResponse();
 		userAddFriendsResponse.setResponseCode(ResponseCode.SUCCESS);
 		return userAddFriendsResponse;
 	}
 
+	@RequestMapping(value = "/user/friend/add" ,method = RequestMethod.POST)
+	public UserAddFriendsResponse requestAddFriendsByJson(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserRelationEntity userRelationEntity=new UserRelationEntity();
+		UserAddFriendsRequest userAddFriendsRequest= new ObjectMapper().readValue(request.getInputStream(), UserAddFriendsRequest.class);
+		User user=getUser();
+		userRelationEntity.setTargetId(userAddFriendsRequest.getUserId());
+		userRelationEntity.setUserId(user.getId());
+		User otherUser = customUserDetailsService.findOne(userAddFriendsRequest.getUserId());
+		userAddFriendsRequest.setImageUrl(qiniuService.createPrivateUrl(userAddFriendsRequest.getImageUrl()));
+		userAddFriendsRequest.setUserId(user.getId());
+		User realUser = customUserDetailsService.findOne(user.getId());
+		userAddFriendsRequest.setHeadImageUrl(qiniuService.createPrivateUrl(realUser.getUserDetailInfoEntity().getHeadImageKey()));
+		userAddFriendsRequest.setUserName(realUser.getUsername());
+		userAddFriendsRequest.setNickName(realUser.getUserDetailInfoEntity().getNickName());
+		userRelationEntity.setRequestData(JSON.toJSONString(userAddFriendsRequest));
+		customUserDetailsService.save(userRelationEntity);
+		IPushResult ret =push2Single.pushTransmissionTemplate(otherUser.getUserDetailInfoEntity().getGeTuiClientId(),userAddFriendsRequest);
+		System.out.println("正常：" + ret.getResponse().toString());
+		UserAddFriendsResponse userAddFriendsResponse=new UserAddFriendsResponse();
+		userAddFriendsResponse.setResponseCode(ResponseCode.SUCCESS);
+		return userAddFriendsResponse;
+	}
 	@RequestMapping(value = "/user/qiniu/token" ,method = RequestMethod.GET)
 	public UserQiniuTokenResponse getQiniuToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		UserQiniuTokenResponse userQiniuTokenResponse=new UserQiniuTokenResponse();
 		userQiniuTokenResponse.setData(qiniuService.getToken());
 		userQiniuTokenResponse.setResponseCode(ResponseCode.SUCCESS);
 		return userQiniuTokenResponse;
+	}
+	@RequestMapping(value = "/user/friendsRecordResponse" ,method = RequestMethod.GET)
+	public UserAddFriendsRecordResponse get(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserAddFriendsRecordResponse userAddFriendsRecordResponse=customUserDetailsService.getUserAddFriendsRecordResponse(getUser().getId(),qiniuService,userFaceImagesService);
+		return userAddFriendsRecordResponse;
 	}
 
 	@RequestMapping(value = "/user/certification" ,method = RequestMethod.GET)
@@ -228,19 +274,43 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/user/friends" ,method = RequestMethod.GET)
 	public UserFriendsResponse getContacts(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		User user=getUser();
+		User user = getUser();
 		UserFriendsResponse userFriendsResponse=customUserDetailsService.getUserFriendsResponse(user.getId(), qiniuService);
 		return userFriendsResponse;
 	}
 	@RequestMapping(value = "/user/friend/{userId}" ,method = RequestMethod.GET)
 	public UserFriendsResponse addFriends(@PathVariable Long userId,HttpServletRequest request, HttpServletResponse response) throws IOException {
 		User user=getUser();
-		UserFriendsResponse userFriendsResponse=customUserDetailsService.addFriends(user.getId(),userId, qiniuService);
-
-		push2Single.pushTransmissionTemplate(userId.toString(),"object");
-
+		UserFriendsResponse userFriendsResponse = customUserDetailsService.addFriends(user.getId(), userId, qiniuService);
+		customUserDetailsService.addFriends(userId,user.getId(),  qiniuService);
+		//push2Single.pushTransmissionTemplate(userId.toString(), "object");
 		return userFriendsResponse;
 	}
+
+	@RequestMapping(value = "/user/friend/accept/{userId}" ,method = RequestMethod.GET)
+	public UserFriendsResponse acceptAddFriend(@PathVariable Long userId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println(userId);
+		User user=getUser();
+		UserFriendsResponse userFriendsResponse = new UserFriendsResponse();//customUserDetailsService.addFriends(user.getId(),userId, qiniuService);
+		UserRelationEntity userRelationEntity=customUserDetailsService.getFriend(userId,user.getId());
+		userRelationEntity.setAccepted((byte) 1);
+		customUserDetailsService.save(userRelationEntity);
+
+
+
+		UserRelationEntity userRelationEntity1=customUserDetailsService.getFriend(userRelationEntity.getTargetId(),userRelationEntity.getUserId());
+		if(userRelationEntity1==null)
+			userRelationEntity1=new UserRelationEntity();
+		userRelationEntity1.setUserId(userRelationEntity.getTargetId());
+		userRelationEntity1.setTargetId(userRelationEntity.getUserId());
+		userRelationEntity1.setAccepted(userRelationEntity.getAccepted());
+		userRelationEntity1.setRequestData("");
+		customUserDetailsService.save(userRelationEntity1);
+		push2Single.pushTransmissionTemplate(userId.toString(), "object");
+		userFriendsResponse.setResponseCode(ResponseCode.SUCCESS);
+		return userFriendsResponse;
+	}
+
 	/**
 	 * 获取当前登录用户
 	 * @return User 用户实体

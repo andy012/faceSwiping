@@ -198,8 +198,24 @@ public class UserControllerTest {
         //System.out.println(JSON.toJSONString(userSecretRequest));
         testLogin();
         try {
-            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/friend/24").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
+            for(int i=32;i<=36;++i) {
+                MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/friend/"+i).headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
+                System.out.println(result.getResponse().getContentAsString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testGetFriends() {
+        //System.out.println(JSON.toJSONString(userSecretRequest));
+        testLogin();
+        try {
+
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/friends").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
             System.out.println(result.getResponse().getContentAsString());
+
         } catch (Exception e) {
             e.printStackTrace();
         }

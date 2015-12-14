@@ -56,7 +56,7 @@ public class Push2SingleImpl implements Push2Single{
         TransmissionTemplate template = new TransmissionTemplate();
         template.setAppId(GetuiConfig.GE_TUI_APP_ID_VALUE);
         template.setAppkey(GetuiConfig.GE_TUI_APP_KEY_VALUE);
-        template.setTransmissionType(1);
+        template.setTransmissionType(2);
         template.setTransmissionContent(content);
         // template.setDuration("2015-01-16 11:40:00", "2015-01-16 12:24:00");
 //		template.setPushInfo("", 1, "", "", "", "", "", "");

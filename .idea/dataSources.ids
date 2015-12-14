@@ -97,10 +97,11 @@
     </table>
     <table name="USER_RELATION" schema="" catalog="faceSwiping" type="TABLE">
       <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="USER_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" remarks="55So5oi3SUQ="/>
-      <column name="TARGET_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" remarks="5aW95Y+LSUQ="/>
-      <column name="ACCEPTED" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="5piv5ZCm6KKr5o6l5Y+XLDDooajnpLrmnKrmjqXlj5csMeihqOekuuW3suaOpeWPlw=="/>
+      <column name="USER_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" remarks="SUQ="/>
+      <column name="TARGET_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" remarks="SUQ="/>
+      <column name="ACCEPTED" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="LDAsMQ=="/>
       <column name="UPDATE_TIME" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="REQUEST_DATA" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
     <table name="USER_SWIPING_IMAGES" schema="" catalog="faceSwiping" type="TABLE">

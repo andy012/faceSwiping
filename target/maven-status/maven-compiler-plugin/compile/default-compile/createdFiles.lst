@@ -3,6 +3,7 @@ com/face/filter/StatelessLoginFilter.class
 com/face/util/ThreadPoolManager.class
 com/face/service/qiniu/QiniuService.class
 com/face/service/youtu/sign/YoutuSign.class
+com/face/data/youtu/UserFaceIdentifyResponseOne.class
 com/face/service/youtu/sign/MD5.class
 com/face/web/common/BaseController.class
 com/face/filter/TokenAuthenticationService.class
@@ -12,6 +13,7 @@ com/face/init/config/DataSourceConfig.class
 com/face/util/Util.class
 com/face/model/common/ResultInfo.class
 com/face/service/youtu/Youtu$TrustAnyTrustManager.class
+com/face/data/user/UserAddFriendsRecordResponse.class
 com/face/util/Constants.class
 com/face/web/user/UserController.class
 com/face/util/Constants$IsProxy.class
@@ -61,6 +63,7 @@ com/face/service/youtu/HttpsUtil$TrustAnyHostnameVerifier.class
 com/face/init/config/MessageSourceConfig.class
 com/face/init/security/StatelessAuthenticationSecurityConfig.class
 com/face/service/youtu/HttpsUtil.class
+com/face/data/youtu/NewFriendBean.class
 com/face/util/Constants$Sys.class
 com/face/init/Initializer.class
 com/face/util/Constants$FriendStatus.class

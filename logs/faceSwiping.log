@@ -1,9 +1,31 @@
-2015-12-13 00:35:33,387 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
-2015-12-13 00:42:23,317 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
-2015-12-13 00:45:47,957 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
-2015-12-13 00:47:51,385 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
-2015-12-13 09:49:28,144 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'GE_TUI_CLIENT_ID' cannot be null
-2015-12-13 10:00:19,403 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
-2015-12-13 10:15:41,069 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
-2015-12-13 10:17:13,040 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
-2015-12-13 10:19:25,171 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'FACE_ID' cannot be null
+2015-12-14 02:45:52,037 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2015-12-14 02:55:02,844 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2015-12-14 02:55:13,836 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2015-12-14 03:08:53,597 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Column 'REQUEST_DATA' cannot be null
+2015-12-14 03:10:42,711 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2015-12-14 04:04:12,521 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2015-12-14 04:04:13,284 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2015-12-14 04:16:28,048 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2015-12-14 08:06:14,184 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2015-12-14 08:06:14,965 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2015-12-14 08:06:24,681 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.

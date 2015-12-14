@@ -60,7 +60,7 @@ public class FaceControllerTest {
     @Test
     public void testLogin(){
 
-        String loginData="{ \"username\":\"1\", \"password\":\"1\"}";
+        String loginData="{ \"username\":\"Judy\", \"password\":\"1\"}";
         try {
             System.out.println(MediaType.APPLICATION_JSON);
             System.out.println(loginData);
@@ -143,10 +143,24 @@ public class FaceControllerTest {
 
         testLogin();
         UserFaceIdentifyRequest userFaceIdentifyRequest=new UserFaceIdentifyRequest();
-        userFaceIdentifyRequest.setKey("2.pic_thumb.jpg");
+        userFaceIdentifyRequest.setKey("96cdcb76-57b9-4162-a06e-3af10d4da04c");
         System.out.println(JSON.toJSONString(userFaceIdentifyRequest));
         try {
-            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/face/identify").headers(getHttpHeaders()).content(JSON.toJSONString(userFaceIdentifyRequest)).contentType(MediaType.APPLICATION_JSON)).andDo(MockMvcResultHandlers.print()).andReturn();
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/face/identify/96cdcb76-57b9-4162-a06e-3af10d4da04c").headers(getHttpHeaders()).content(JSON.toJSONString(userFaceIdentifyRequest)).contentType(MediaType.APPLICATION_JSON)).andDo(MockMvcResultHandlers.print()).andReturn();
+        }catch (Exception e){
+
+        }
+
+    }
+    @Test
+    public void testFriendsRecordResponseFace(){
+
+        testLogin();
+        UserFaceIdentifyRequest userFaceIdentifyRequest=new UserFaceIdentifyRequest();
+        userFaceIdentifyRequest.setKey("96cdcb76-57b9-4162-a06e-3af10d4da04c");
+        System.out.println(JSON.toJSONString(userFaceIdentifyRequest));
+        try {
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/friendsRecordResponse").headers(getHttpHeaders()).content(JSON.toJSONString(userFaceIdentifyRequest)).contentType(MediaType.APPLICATION_JSON)).andDo(MockMvcResultHandlers.print()).andReturn();
         }catch (Exception e){
 
         }
@@ -170,14 +184,13 @@ public class FaceControllerTest {
 
     @Test
     public void testQiniuToken(){
-
         testLogin();
-
         try {
             MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user/qiniu/token").headers(getHttpHeaders())).andDo(MockMvcResultHandlers.print()).andReturn();
         }catch (Exception e){
             e.printStackTrace();
         }
+
 
     }
 

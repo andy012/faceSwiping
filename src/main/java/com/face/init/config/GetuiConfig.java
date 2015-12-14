@@ -23,15 +23,15 @@ public class GetuiConfig {
     public static String GE_TUI_APP_ID_VALUE ="";
     public static String GE_TUI_APP_KEY_VALUE ="";
     public static String GE_TUI_MASTER_VALUE ="";
+    public static String GE_TUI_HOST_VALUE ="";
 
 
     @Bean
     public IGtPush getIGtPush(){
-
-        this.GE_TUI_APP_ID_VALUE=env.getRequiredProperty(GE_TUI_HOST);
+        this.GE_TUI_APP_ID_VALUE=env.getRequiredProperty(GE_TUI_APP_ID);
         this.GE_TUI_APP_KEY_VALUE=env.getRequiredProperty(GE_TUI_APP_KEY);
         this.GE_TUI_MASTER_VALUE=env.getRequiredProperty(GE_TUI_MASTER);
-
+        this.GE_TUI_HOST_VALUE=env.getRequiredProperty(GE_TUI_HOST);
         return new IGtPush(env.getRequiredProperty(GE_TUI_HOST),
                 env.getRequiredProperty(GE_TUI_APP_KEY),
                 env.getRequiredProperty(GE_TUI_MASTER));

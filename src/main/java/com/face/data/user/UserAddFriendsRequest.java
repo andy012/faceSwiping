@@ -5,13 +5,16 @@ package com.face.data.user;
  */
 public class UserAddFriendsRequest {
 
-    private String userId;
+    private Long userId;
     private String imageUrl;
+    private String userName;
+    private String nickName;
+    private String headImageUrl;
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
     public String getImageUrl() {
@@ -20,4 +23,30 @@ public class UserAddFriendsRequest {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getHeadImageUrl() {
+        return headImageUrl;
+    }
+
+    public void setHeadImageUrl(String headImageUrl) {
+        this.headImageUrl = headImageUrl;
+    }
+
+
 }

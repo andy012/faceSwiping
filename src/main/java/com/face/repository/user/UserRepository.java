@@ -18,7 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Modifying
 	@Query(value = "update `user` set COMPANY_ID = ?1 where id = ?2 ", nativeQuery = true)
 	public int updateCompanyIdById(final Long companyId, final Long id);
-	@Query(value = "from User user where user.id in (select userRelationEntity.targetId from UserRelationEntity userRelationEntity where userRelationEntity.userId=?1 and userRelationEntity.accepted= 1)")
+	@Query(value = "from User user where user.id in (select userRelationEntity.targetId from UserRelationEntity userRelationEntity where userRelationEntity.userId=?1 and userRelationEntity.accepted= 1 order by userRelationEntity.updateTime desc ) ")
 	public List<User> findFriends(Long userId);
 
 }

@@ -234,13 +234,28 @@ public class YoutuServiceImpl implements YoutuService{
          * 转化为用户基本信息
          */
         for(Candidate candidate:identityFaceResponse.getCandidates()){
+            if(Long.parseLong(candidate.getPersonId())==myUser.getId()){
+                continue;
+            }
             User user=customUserDetailsService.findOne(Long.parseLong(candidate.getPersonId()));
             FaceIdentifyUserBaseInfo faceIdentifyUserBaseInfo=new FaceIdentifyUserBaseInfo();
+            List<UserFaceImagesEntity>  userFaceImagesEntities=userFaceImagesService.findAllByUserId(user.getId());
+
+            if(userFaceImagesEntities.size()>0){
+                faceIdentifyUserBaseInfo.setHeadImageUrl(qiniuService.createPrivateUrl(userFaceImagesEntities.get(0).getImageKey()));
+
+
+            }else {
+                continue;
+            }
             faceIdentifyUserBaseInfo.setConfidence(candidate.getConfidence());
             faceIdentifyUserBaseInfo.setId(user.getId());
             faceIdentifyUserBaseInfo.setNickName(user.getUserDetailInfoEntity().getNickName());
             faceIdentifyUserBaseInfo.setUserName(user.getUsername());
-            faceIdentifyUserBaseInfo.setHeadImageUrl(qiniuService.createPrivateUrl(user.getUserDetailInfoEntity().getHeadImageKey()));
+
+
+
+
             if(customUserDetailsService.getFriend(myUser.getId(),user.getId())!=null){
                 faceIdentifyUserBaseInfo.setIsFriends(1);
             }else {
@@ -251,6 +266,8 @@ public class YoutuServiceImpl implements YoutuService{
         userFaceIdentifyResponse.setResponseCode(ResponseCode.SUCCESS);
         return userFaceIdentifyResponse;
     }
+
+
 
     @Override
     public UserFaceIdentifyResponse FaceIdentifyBase64(StringBuffer image_data,User myUser) throws KeyManagementException, NoSuchAlgorithmException, JSONException, IOException {

@@ -14,6 +14,7 @@ public class UserRelationEntity {
     private long targetId;
     private byte accepted;
     private Timestamp updateTime;
+    private String requestData;
 
     @Id
     @Column(name = "ID", nullable = false, insertable = true, updatable = true)
@@ -80,7 +81,6 @@ public class UserRelationEntity {
 
         return true;
     }
-
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
@@ -89,5 +89,15 @@ public class UserRelationEntity {
         result = 31 * result + (int) accepted;
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "REQUEST_DATA", nullable = false, insertable = true, updatable = true, length = 65535)
+    public String getRequestData() {
+        return requestData;
+    }
+
+    public void setRequestData(String requestData) {
+        this.requestData = requestData;
     }
 }

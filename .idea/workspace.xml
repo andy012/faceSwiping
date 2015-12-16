@@ -7,56 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a87d1658-87c7-47dc-93b4-06533abb33e9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/face/data/user/UserAddFriendsRecordResponse.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/142-63-118file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/152-33-58file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/152-73-98file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/298-68-114file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/308-78-94file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/323file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/44-17-52file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/456-111-131file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/466-121-111file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/480file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/698file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/97-17-53file.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/service/user/CustomUserDetailsService.class" afterPath="$PROJECT_DIR$/target/classes/com/face/service/user/CustomUserDetailsService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/service/user/impl/CustomUserDetailsServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/face/service/user/impl/CustomUserDetailsServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/web/youtu/FaceController.class" afterPath="$PROJECT_DIR$/target/classes/com/face/web/youtu/FaceController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/test/controller/youtu/FaceControllerTest.class" afterPath="$PROJECT_DIR$/target/test-classes/test/controller/youtu/FaceControllerTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/init/config/GetuiConfig.class" afterPath="$PROJECT_DIR$/target/classes/com/face/init/config/GetuiConfig.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/service/getui/impl/Push2SingleImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/face/service/getui/impl/Push2SingleImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/data/util/ResponseCode.class" afterPath="$PROJECT_DIR$/target/classes/com/face/data/util/ResponseCode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/data/user/UserAddFriendsRequest.class" afterPath="$PROJECT_DIR$/target/classes/com/face/data/user/UserAddFriendsRequest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/web/user/UserController.class" afterPath="$PROJECT_DIR$/target/classes/com/face/web/user/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/test/controller/user/UserControllerTest.class" afterPath="$PROJECT_DIR$/target/test-classes/test/controller/user/UserControllerTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/model/user/UserRelationEntity.class" afterPath="$PROJECT_DIR$/target/classes/com/face/model/user/UserRelationEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/repository/user/UserRelationEntityRepository.class" afterPath="$PROJECT_DIR$/target/classes/com/face/repository/user/UserRelationEntityRepository.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/repository/user/UserRepository.class" afterPath="$PROJECT_DIR$/target/classes/com/face/repository/user/UserRepository.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/test/service/UserServiceTest.class" afterPath="$PROJECT_DIR$/target/test-classes/test/service/UserServiceTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/face/service/youtu/impl/YoutuServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/face/service/youtu/impl/YoutuServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/service/user/CustomUserDetailsService.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/service/user/CustomUserDetailsService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/service/user/impl/CustomUserDetailsServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/service/user/impl/CustomUserDetailsServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/web/youtu/FaceController.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/web/youtu/FaceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/test/controller/youtu/FaceControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/test/controller/youtu/FaceControllerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/init/config/GetuiConfig.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/init/config/GetuiConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/service/getui/impl/Push2SingleImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/service/getui/impl/Push2SingleImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/data/user/UserAddFriendsRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/data/user/UserAddFriendsRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/web/user/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/web/user/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/test/controller/user/UserControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/test/controller/user/UserControllerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/model/user/UserRelationEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/model/user/UserRelationEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/repository/user/UserRelationEntityRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/repository/user/UserRelationEntityRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/repository/user/UserRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/repository/user/UserRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/test/service/UserServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/test/service/UserServiceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/service/youtu/YoutuService.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/service/youtu/YoutuService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/face/service/youtu/impl/YoutuServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/face/service/youtu/impl/YoutuServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tomcat/logs/access_log.2015-12-13" afterPath="$PROJECT_DIR$/target/tomcat/logs/access_log.2015-12-13" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/faceSwiping.log" afterPath="$PROJECT_DIR$/logs/faceSwiping.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/sql/user.xml" afterPath="$PROJECT_DIR$/src/main/resources/sql/user.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/sql/user.xml" afterPath="$PROJECT_DIR$/target/classes/sql/user.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="springboot-stateless-state-auth.iws" />
@@ -115,10 +65,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CustomUserDetailsServiceImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CustomUserDetailsServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/face/service/user/impl/CustomUserDetailsServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.96428573">
+            <state vertical-scroll-proportion="-10.0">
               <caret line="149" column="16" selection-start-line="149" selection-start-column="16" selection-end-line="149" selection-end-column="16" />
               <folding>
                 <element signature="e#2106#2107#0" expanded="true" />
@@ -143,16 +93,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="faceSwiping.USER_DETAIL_INFO" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/63ed8e7c/21e5bb4f-3f69-47a9-a739-7cc85c907c5b/faceSwiping..USER_DETAIL_INFO">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+      <file leaf-file-name="UserLoginResponse.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/face/data/user/UserLoginResponse.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.42207792">
+              <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
-          <provider editor-type-id="text-editor">
+        </entry>
+      </file>
+      <file leaf-file-name="UserBaseInfo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/face/data/user/UserBaseInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="11" column="40" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -168,6 +123,16 @@
           <provider editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserFaceImagesServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/face/service/user/impl/UserFaceImagesServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -220,26 +185,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="28" column="153" selection-start-line="28" selection-start-column="153" selection-end-line="28" selection-end-column="153" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FaceController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/face/web/youtu/FaceController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="171" column="0" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="YoutuServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/face/service/youtu/impl/YoutuServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="249" column="13" selection-start-line="241" selection-start-column="12" selection-end-line="249" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -1690,6 +1635,70 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="face swiping" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="faceSwiping" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="face" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="face swiping" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="faceSwiping" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="face" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -2301,12 +2310,12 @@
       <workItem from="1449884840386" duration="7284000" />
       <workItem from="1449903467290" duration="47375000" />
       <workItem from="1449986889566" duration="5961000" />
-      <workItem from="1449995047631" duration="47071000" />
+      <workItem from="1449995047631" duration="49867000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="244312000" />
+    <option name="totallyTimeSpent" value="247108000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2319,7 +2328,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2331,13 +2340,13 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32875606" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5410959" sideWeight="0.49676898" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5410959" sideWeight="0.49676898" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30775446" sideWeight="0.24285714" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30775446" sideWeight="0.75714284" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2835218" sideWeight="0.5367347" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20759289" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1365105" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2409,26 +2418,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/face/init/config/DataSourceConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.111111">
-          <caret line="35" column="27" selection-start-line="35" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/face/data/youtu/UserFacesRequest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="24" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/face/data/user/UserLoginResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="43" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -2509,14 +2502,6 @@
             <element signature="e#362#363#0" expanded="false" />
             <element signature="e#389#390#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/face/data/user/UserBaseInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="10" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2823,19 +2808,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/63ed8e7c/21e5bb4f-3f69-47a9-a739-7cc85c907c5b/faceSwiping..USER_RELATION">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/63ed8e7c/21e5bb4f-3f69-47a9-a739-7cc85c907c5b/faceSwiping..USER_DETAIL_INFO">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -2872,23 +2844,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/63ed8e7c/21e5bb4f-3f69-47a9-a739-7cc85c907c5b/faceSwiping..USER">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/face/service/user/CustomUserDetailsService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="153" selection-start-line="28" selection-start-column="153" selection-end-line="28" selection-end-column="153" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/face/repository/user/UserRelationEntityRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -2906,22 +2873,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/face/repository/user/UserRelationEntityRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/face/service/user/impl/UserFaceImagesServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/face/service/user/impl/CustomUserDetailsServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.96428573">
+        <state vertical-scroll-proportion="-10.0">
           <caret line="149" column="16" selection-start-line="149" selection-start-column="16" selection-end-line="149" selection-end-column="16" />
           <folding>
             <element signature="e#2106#2107#0" expanded="true" />
             <element signature="e#2148#2149#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/63ed8e7c/21e5bb4f-3f69-47a9-a739-7cc85c907c5b/faceSwiping..USER">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/face/data/user/UserBaseInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/63ed8e7c/21e5bb4f-3f69-47a9-a739-7cc85c907c5b/faceSwiping..USER_RELATION">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/face/data/user/UserLoginResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42207792">
+          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
